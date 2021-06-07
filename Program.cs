@@ -50,6 +50,8 @@ namespace tetris
                        {
                     
                            ConsoleKeyInf = Console.ReadKey();
+
+                           Console.SetCursorPosition(MyShape.positionX,MyShape.positionY); // затычка, курсор убегает, стирает стены 
        
                        };
 
@@ -59,30 +61,32 @@ namespace tetris
                 
                       delayTimer  = delayGame(550);  
 
-                      MyShape.DrawShape(true);             
                    
                       switch(ConsoleKeyInf.Key)
     
                          { 
                              case ConsoleKey.LeftArrow:
                                  {
+                                     MyShape.DrawShape(true);             
                                      MyShape.MooveShapeleft();   
+                    
                                      break;
                                  }
                              case ConsoleKey.RightArrow: 
                                  {
+                                     MyShape.DrawShape(true);             
                                      MyShape.MooveShapeRight();   
                                      break;
                                  }
-                            default:
-                                {
-                                    MyShape.MooveShapeDown();
-                                    break;
-                                }
-            
-
+                      
+                        
                          } 
+                      MyShape.DrawShape(true);             
+                      MyShape.MooveShapeDown();
+ 
                       MyShape.DrawShape(false);
+                      
+                      //WorkSpace.DrawWall();
 
                       ConsoleKeyInf = new ConsoleKeyInfo();       
   

@@ -169,6 +169,7 @@ public class Shape
                    
                     if (shapeMap[y,x].visibility == 1) { if (clear) shapeMap[y,x].ClearPoint(); else shapeMap[y,x].DrawPoint();}
                 
+                    Console.SetCursorPosition(positionX,positionY);                                   
                 }
 
             }    
