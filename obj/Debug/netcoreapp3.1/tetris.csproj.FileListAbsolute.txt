@@ -11,3 +11,16 @@ D:\MyProject\tetris\bin\Debug\netcoreapp3.1\tetris.pdb
 D:\MyProject\tetris\obj\Debug\netcoreapp3.1\tetris.dll
 D:\MyProject\tetris\obj\Debug\netcoreapp3.1\tetris.pdb
 D:\MyProject\tetris\obj\Debug\netcoreapp3.1\tetris.genruntimeconfig.cache
+E:\Profiles\d.ronjin\MyProject\tetris\bin\Debug\netcoreapp3.1\tetris.exe
+E:\Profiles\d.ronjin\MyProject\tetris\bin\Debug\netcoreapp3.1\tetris.deps.json
+E:\Profiles\d.ronjin\MyProject\tetris\bin\Debug\netcoreapp3.1\tetris.runtimeconfig.json
+E:\Profiles\d.ronjin\MyProject\tetris\bin\Debug\netcoreapp3.1\tetris.runtimeconfig.dev.json
+E:\Profiles\d.ronjin\MyProject\tetris\bin\Debug\netcoreapp3.1\tetris.dll
+E:\Profiles\d.ronjin\MyProject\tetris\bin\Debug\netcoreapp3.1\tetris.pdb
+E:\Profiles\d.ronjin\MyProject\tetris\obj\Debug\netcoreapp3.1\tetris.csprojAssemblyReference.cache
+E:\Profiles\d.ronjin\MyProject\tetris\obj\Debug\netcoreapp3.1\tetris.AssemblyInfoInputs.cache
+E:\Profiles\d.ronjin\MyProject\tetris\obj\Debug\netcoreapp3.1\tetris.AssemblyInfo.cs
+E:\Profiles\d.ronjin\MyProject\tetris\obj\Debug\netcoreapp3.1\tetris.csproj.CoreCompileInputs.cache
+E:\Profiles\d.ronjin\MyProject\tetris\obj\Debug\netcoreapp3.1\tetris.dll
+E:\Profiles\d.ronjin\MyProject\tetris\obj\Debug\netcoreapp3.1\tetris.pdb
+E:\Profiles\d.ronjin\MyProject\tetris\obj\Debug\netcoreapp3.1\tetris.genruntimeconfig.cache

@@ -3,7 +3,7 @@ using System;
 static public class WorkSpace
 {
     static int x = 35;
-    static int y = 32;
+    static int y = 20;
 
     static public void InintWindowsSize()
     {
@@ -17,16 +17,16 @@ static public class WorkSpace
     {
 
         // горизонтальные линии
-        for (int i = 1; i<=x; i++)
-        {
+        //for (int i = 1; i<=x; i++)
+        //{
 
             // Console.SetCursorPosition(i,1);
             // Console.Write(''); 
 
-            Console.SetCursorPosition(i,y);
-            Console.Write('_'); 
+            //Console.SetCursorPosition(i,y);
+            //Console.Write('_'); 
 
-        }
+        //}
 
 
         // Вертикальные линии
@@ -36,7 +36,11 @@ static public class WorkSpace
             Console.SetCursorPosition(1,i);
             Console.Write('|'); 
 
-            Console.SetCursorPosition(22,i);
+            Console.SetCursorPosition(2,i);
+            Console.Write($"{i}"); 
+
+
+            Console.SetCursorPosition(21,i);
             Console.Write('|'); 
 
             Console.SetCursorPosition(x,i);

@@ -2,6 +2,7 @@ using System;
 
 static public class Game
 {
+
     static public int score {get;set;}
     static public int speed {get;set;}
 

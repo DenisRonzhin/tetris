@@ -25,7 +25,7 @@ public class Shape
             positionY = y;
 
         }
-
+    
         Point[,]  shapeMap;
 
         public int positionX {set;get;} 
