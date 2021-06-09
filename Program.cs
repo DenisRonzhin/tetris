@@ -12,7 +12,6 @@ namespace tetris
 
             Game.score = 0;
             Game.speed = 1;
-
             Game.DrawIndicators(); 
 
 
@@ -37,7 +36,10 @@ namespace tetris
             MyShape = new Shape('#',12,1);
             MyShape.CreateShape();
             MyShape.DrawShape(false);
-            
+
+            Game.InitPointMap();
+
+
             Task delayTimer = Task.CompletedTask;
 
             ConsoleKeyInfo ConsoleKeyInf = new ConsoleKeyInfo();
@@ -45,6 +47,7 @@ namespace tetris
             while (true)
                  {
 
+                   Game.currentShape = MyShape;
 
                    if (Console.KeyAvailable)
                        {
@@ -82,10 +85,13 @@ namespace tetris
                         
                          } 
                       MyShape.DrawShape(true);             
-                      MyShape.MooveShapeDown();
+                      Game.ClearPointMap();  
+                     // MyShape.MooveShapeDown();
  
                       MyShape.DrawShape(false);
-                      
+                      Game.FillPointMap();
+                      Game.ShowPointMap();
+
                       //WorkSpace.DrawWall();
 
                       ConsoleKeyInf = new ConsoleKeyInfo();       

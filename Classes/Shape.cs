@@ -26,7 +26,7 @@ public class Shape
 
         }
     
-        Point[,]  shapeMap;
+        public Point[,]  shapeMap;
 
         public int positionX {set;get;} 
         public int positionY {set;get;} 
@@ -161,13 +161,13 @@ public class Shape
 
         public void DrawShape(bool clear)
         {
-            for (int y = 0; y < 4; y++)
+            for (int x = 0; x < 4; x++)
             {
-                for (int x = 0; x< 4; x++)
+                for (int y = 0; y< 4; y++)
                 {
                     Console.SetCursorPosition(positionX+x,positionY+y);
                    
-                    if (shapeMap[y,x].visibility == 1) { if (clear) shapeMap[y,x].ClearPoint(); else shapeMap[y,x].DrawPoint();}
+                    if (shapeMap[x,y].visibility == 1) { if (clear) shapeMap[x,y].ClearPoint(); else shapeMap[x,y].DrawPoint();}
                 
                     Console.SetCursorPosition(positionX,positionY);                                   
                 }

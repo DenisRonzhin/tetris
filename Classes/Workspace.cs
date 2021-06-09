@@ -9,8 +9,11 @@ static public class WorkSpace
     {
        Console.ForegroundColor = ConsoleColor.Green; 
        Console.Clear(); 
-       Console.SetWindowSize(x, y); 
+       //Console.SetWindowSize(x, y); 
     
+        Console.SetWindowSize(100, y); 
+    
+
     }
 
     static public void DrawWall()
