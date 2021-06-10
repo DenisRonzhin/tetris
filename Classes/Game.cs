@@ -11,11 +11,11 @@ static public class Game
     //Заполняем стакан нулевыми элементами
     static public void InitPointMap()
     {
-        for (int x = 0; x < 20; x++)
+        for (int col = 0; col < 20; col++)
         {
-            for (int y = 0; y < 20; y++)
+            for (int row = 0; row < 20; row++)
             {
-               pointMap[x,y] = new Point(0,0,' ');  
+               pointMap[row,col] = new Point(0,0,' ');  
             }
             
         }
@@ -24,16 +24,16 @@ static public class Game
 
     static public void FillPointMap()
     {
-        for (int x = 0; x < Math.Min(4,21 - currentShape.positionX); x++)
+        for (int col = 0; col < Math.Min(4,21 - currentShape.positionX); col++)
         {
-            for (int y = 0; y < 4; y++)
+            for (int row = 0; row < 4; row++)
             {
-               pointMap[currentShape.positionX-2+x,currentShape.positionY+y] = currentShape.shapeMap[x,y];
+                 pointMap[currentShape.positionY+row,currentShape.positionX-2+col] = currentShape.shapeMap[row,col];
 
 
                 //отладка
                 Console.SetCursorPosition(80,1);
-                Console.Write($"X = {currentShape.positionX+x} Y = {currentShape.positionY+y}");
+                Console.Write($"X = {currentShape.positionX+col} Y = {currentShape.positionY+row}");
       
 
             }
@@ -44,11 +44,11 @@ static public class Game
 
     static public void ClearPointMap()
     {
-        for (int x = 0; x < Math.Min(4,(21 - currentShape.positionX)); x++)
+        for (int col = 0; col < Math.Min(4,(21 - currentShape.positionX)); col++)
         {
-            for (int y = 0; y < 4; y++)
+            for (int row = 0; row < 4; row++)
             {
-               pointMap[currentShape.positionX-2+x,currentShape.positionY+y] = new Point(0,0,' ');
+               pointMap[currentShape.positionY+row,currentShape.positionX-2+col] = new Point(0,0,' ');
 
             }
         }
@@ -58,12 +58,12 @@ static public class Game
 
     static public void ShowPointMap()
     {
-        for (int x = 0; x < 20; x++)
+        for (int col = 0; col < 20; col++)
         {
-            for (int y = 0; y < 20; y++)
+            for (int row = 0; row < 20; row++)
             {
-                Console.SetCursorPosition(50+x,1+y);
-                pointMap[x,y].DrawPoint();
+                Console.SetCursorPosition(50+col,row);
+                pointMap[row,col].DrawPoint();
             }
         }
 

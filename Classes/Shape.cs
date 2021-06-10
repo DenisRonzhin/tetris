@@ -3,6 +3,12 @@ using System;
 public class Shape 
     {
         public char vsb {get;set;}
+        
+        public enum drawingOption
+        {
+          clear,
+          draw      
+        }
 
         public enum typeShape 
             {
@@ -16,7 +22,25 @@ public class Shape
             }       
 
         public typeShape tShape {get;set;} 
-     
+
+
+        //Структура хранит крайние индексы фигуры в массиве 4x4 
+        struct extremPoints
+        {
+            int leftPointPosition;
+            int rightPointPosition;
+            int topPointPosition; 
+
+            public extremPoints(int leftPointPosition, int rightPointPosition, int topPointPosition)
+            {
+                this.leftPointPosition = leftPointPosition;
+                this.rightPointPosition = rightPointPosition;
+                this.topPointPosition = topPointPosition;
+
+            }
+        
+        }
+        
         public Shape(char visibleSymbol, int x, int y )
         {
             vsb = visibleSymbol;
@@ -159,15 +183,18 @@ public class Shape
  
         }
 
-        public void DrawShape(bool clear)
+        //positionX, positionY - текущая позиция массива с фигурой
+        //параметр drOption - вариант отрисовки фигуры. clear - стереть, draw - отобразить на экране
+
+        public void DrawShape(drawingOption drOption)
         {
-            for (int x = 0; x < 4; x++)
+            for (int col = 0; col < 4; col++)
             {
-                for (int y = 0; y< 4; y++)
+                for (int row = 0; row< 4; row++)
                 {
-                    Console.SetCursorPosition(positionX+x,positionY+y);
+                    Console.SetCursorPosition(positionX+col,positionY+row);
                    
-                    if (shapeMap[x,y].visibility == 1) { if (clear) shapeMap[x,y].ClearPoint(); else shapeMap[x,y].DrawPoint();}
+                    if (shapeMap[row,col].visibility == 1) { if (drOption == drawingOption.clear) shapeMap[row,col].ClearPoint(); else shapeMap[row,col].DrawPoint();}
                 
                     Console.SetCursorPosition(positionX,positionY);                                   
                 }

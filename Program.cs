@@ -35,7 +35,7 @@ namespace tetris
 
             MyShape = new Shape('#',12,1);
             MyShape.CreateShape();
-            MyShape.DrawShape(false);
+            MyShape.DrawShape(Shape.drawingOption.draw);
 
             Game.InitPointMap();
 
@@ -70,27 +70,27 @@ namespace tetris
                          { 
                              case ConsoleKey.LeftArrow:
                                  {
-                                     MyShape.DrawShape(true);             
+                                     MyShape.DrawShape(Shape.drawingOption.clear);             
                                      MyShape.MooveShapeleft();   
                     
                                      break;
                                  }
                              case ConsoleKey.RightArrow: 
                                  {
-                                     MyShape.DrawShape(true);             
+                                     MyShape.DrawShape(Shape.drawingOption.clear);             
                                      MyShape.MooveShapeRight();   
                                      break;
                                  }
                       
                         
                          } 
-                      MyShape.DrawShape(true);             
-                      Game.ClearPointMap();  
+                      MyShape.DrawShape(Shape.drawingOption.clear);             
+                      Game.ClearPointMap(); // тестовая хуйня для отладки массива поля
                      // MyShape.MooveShapeDown();
  
-                      MyShape.DrawShape(false);
-                      Game.FillPointMap();
-                      Game.ShowPointMap();
+                      MyShape.DrawShape(Shape.drawingOption.draw);
+                      Game.FillPointMap(); //  тестовая хуйня для отладки массива поля
+                      Game.ShowPointMap(); //  тестовая хуйня для отладки массива поля
 
                       //WorkSpace.DrawWall();
 
