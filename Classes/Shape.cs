@@ -25,21 +25,22 @@ public class Shape
 
 
         //Структура хранит крайние индексы фигуры в массиве 4x4 
-        struct extremPoints
+        public struct extremPoints
         {
-            int leftPointPosition;
-            int rightPointPosition;
-            int topPointPosition; 
+            public int leftPointPosition;
+            public int rightPointPosition;
+            public int topPointPosition; 
 
             public extremPoints(int leftPointPosition, int rightPointPosition, int topPointPosition)
             {
                 this.leftPointPosition = leftPointPosition;
                 this.rightPointPosition = rightPointPosition;
                 this.topPointPosition = topPointPosition;
-
             }
         
         }
+
+          
         
         public Shape(char visibleSymbol, int x, int y )
         {
@@ -181,6 +182,30 @@ public class Shape
                 
             }
  
+        }
+
+        //Метод для поиска границ фигуры
+        public extremPoints FindExtrem()
+        {
+            int minX = 4;
+            int maxX = 0;
+            int maxY = 0;    
+
+
+            for (int col = 0; col < 4; col++)
+            {
+                for (int row = 0; row < 4; row++)
+                {
+                    if (shapeMap[row,col].visibility == 1 && col < minX) {minX = col;}
+                    if (shapeMap[row,col].visibility == 1 && col > maxX) {maxX = col;}
+                    if (shapeMap[row,col].visibility == 1 && row > maxY) {maxY = row;}
+    
+                }    
+
+            }
+
+            return new extremPoints(minX,maxX,maxY); 
+
         }
 
         //positionX, positionY - текущая позиция массива с фигурой

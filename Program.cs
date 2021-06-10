@@ -64,6 +64,8 @@ namespace tetris
                 
                       delayTimer  = delayGame(550);  
 
+
+                    //алгоритм отрисовки: стираем, меняем координаты, рисуем по новой.
                    
                       switch(ConsoleKeyInf.Key)
     
@@ -71,13 +73,15 @@ namespace tetris
                              case ConsoleKey.LeftArrow:
                                  {
                                      MyShape.DrawShape(Shape.drawingOption.clear);             
+                                     Game.ClearPointMap();
                                      MyShape.MooveShapeleft();   
                     
                                      break;
                                  }
                              case ConsoleKey.RightArrow: 
                                  {
-                                     MyShape.DrawShape(Shape.drawingOption.clear);             
+                                     MyShape.DrawShape(Shape.drawingOption.clear);
+                                     Game.ClearPointMap();            
                                      MyShape.MooveShapeRight();   
                                      break;
                                  }
@@ -85,12 +89,12 @@ namespace tetris
                         
                          } 
                       MyShape.DrawShape(Shape.drawingOption.clear);             
-                      Game.ClearPointMap(); // тестовая хуйня для отладки массива поля
+                      Game.ClearPointMap(); // тестовая хуйня для отладки массива поля, стираем фигуру из массива поля
                      // MyShape.MooveShapeDown();
  
                       MyShape.DrawShape(Shape.drawingOption.draw);
-                      Game.FillPointMap(); //  тестовая хуйня для отладки массива поля
-                      Game.ShowPointMap(); //  тестовая хуйня для отладки массива поля
+                      Game.FillPointMap(); //  тестовая хуйня для отладки массива поля, заполняем массив поля по текущей фигуре
+                      Game.ShowPointMap(); //  тестовая хуйня для отладки массива поля, отображаем массив поля
 
                       //WorkSpace.DrawWall();
 

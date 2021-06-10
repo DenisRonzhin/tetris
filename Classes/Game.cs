@@ -34,7 +34,14 @@ static public class Game
                 //отладка
                 Console.SetCursorPosition(80,1);
                 Console.Write($"X = {currentShape.positionX+col} Y = {currentShape.positionY+row}");
-      
+
+                Shape.extremPoints extremP;
+                extremP = currentShape.FindExtrem(); 
+
+                Console.SetCursorPosition(80,2);
+                Console.Write($"left = {extremP.leftPointPosition} right = {extremP.rightPointPosition} top = {extremP.topPointPosition}");
+    
+
 
             }
         }

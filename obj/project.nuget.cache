@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/j82xdzgQCfEirrsLczq9hUSSsUuDFBnLjD4D2xfWDq5ZvoRRKNcMePvTg/BBLD9RbxC21XGjkDsqO+oNDd2Hw==",
+  "dgSpecHash": "mMtDEoT7wi/GJl3RVFuQb0Ii+PsPiLxgkJgyvfzH+bAt0kWyUXZ4g637cF+5IxC1x6x4qujtBU7bMCvE5fKtaw==",
   "success": true,
-  "projectFilePath": "E:\\Profiles\\d.ronjin\\MyProject\\tetris\\tetris.csproj",
+  "projectFilePath": "D:\\MyProject\\tetris\\tetris.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
