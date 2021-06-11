@@ -24,9 +24,14 @@ static public class Game
 
     static public void FillPointMap()
     {
-        for (int col = 0; col < Math.Min(4,21 - currentShape.positionX); col++)
+
+        //Получим крайние точки фигуры по вертикали и горизонтали
+        Shape.extremPoints extremP;
+        extremP = currentShape.FindExtrem();     
+
+        for (int col = extremP.leftPointPosition; col < extremP.rightPointPosition+1; col++)
         {
-            for (int row = 0; row < 4; row++)
+            for (int row = 0; row < extremP.topPointPosition+1; row++)
             {
                  pointMap[currentShape.positionY+row,currentShape.positionX-2+col] = currentShape.shapeMap[row,col];
 
@@ -35,26 +40,27 @@ static public class Game
                 Console.SetCursorPosition(80,1);
                 Console.Write($"X = {currentShape.positionX+col} Y = {currentShape.positionY+row}");
 
-                Shape.extremPoints extremP;
-                extremP = currentShape.FindExtrem(); 
-
-                Console.SetCursorPosition(80,2);
-                Console.Write($"left = {extremP.leftPointPosition} right = {extremP.rightPointPosition} top = {extremP.topPointPosition}");
-    
-
 
             }
         }
+
+        Console.SetCursorPosition(80,2);
+        Console.Write($"left = {extremP.leftPointPosition} right = {extremP.rightPointPosition} top = {extremP.topPointPosition}");
 
 
     }
 
     static public void ClearPointMap()
     {
-        for (int col = 0; col < Math.Min(4,(21 - currentShape.positionX)); col++)
+        
+        //Получим крайние точки фигуры по вертикали и горизонтали
+        Shape.extremPoints extremP;
+        extremP = currentShape.FindExtrem();    
+        
+       for (int col = extremP.leftPointPosition; col < extremP.rightPointPosition+1; col++)
         {
-            for (int row = 0; row < 4; row++)
-            {
+            for (int row = 0; row < extremP.topPointPosition+1; row++)
+             {
                pointMap[currentShape.positionY+row,currentShape.positionX-2+col] = new Point(0,0,' ');
 
             }
