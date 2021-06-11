@@ -62,7 +62,7 @@ namespace tetris
 
                  
                 
-                      delayTimer  = delayGame(550);  
+                      delayTimer  = delayGame(150);  
 
 
                     //алгоритм отрисовки: стираем, меняем координаты, рисуем по новой.

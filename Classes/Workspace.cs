@@ -2,16 +2,18 @@ using System;
 
 static public class WorkSpace
 {
-    static int x = 35;
-    static int y = 20;
+    
+    public static int wightForm = 35; //ширина формы
+    public static int hightGame = 20; //высота игрового поля
+    public static int wightGame = 20; //ширина игрового поля
+
 
     static public void InintWindowsSize()
     {
        Console.ForegroundColor = ConsoleColor.Green; 
        Console.Clear(); 
-       //Console.SetWindowSize(x, y); 
-    
-        Console.SetWindowSize(100, y); 
+      
+       Console.SetWindowSize(100, hightGame); // исправить 100 на wightForm
     
 
     }
@@ -34,7 +36,7 @@ static public class WorkSpace
 
         // Вертикальные линии
 
-        for (int i =1; i<=y; i++)
+        for (int i =1; i<=hightGame; i++)
         {
             Console.SetCursorPosition(1,i);
             Console.Write('|'); 
@@ -43,10 +45,10 @@ static public class WorkSpace
             Console.Write($"{i}"); 
 
 
-            Console.SetCursorPosition(21,i);
+            Console.SetCursorPosition(wightGame+1,i);
             Console.Write('|'); 
 
-            Console.SetCursorPosition(x,i);
+            Console.SetCursorPosition(wightForm,i);
             Console.Write('|'); 
         }    
 

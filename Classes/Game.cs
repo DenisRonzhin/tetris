@@ -3,17 +3,19 @@ using System;
 static public class Game
 {
 
+
+
     static public int score {get;set;}
     static public int speed {get;set;}
-    static public Point[,] pointMap = new Point[20,20];
+    static public Point[,] pointMap = new Point[WorkSpace.hightGame,WorkSpace.wightGame];
     static public Shape currentShape {get; set;}
     
     //Заполняем стакан нулевыми элементами
     static public void InitPointMap()
     {
-        for (int col = 0; col < 20; col++)
+        for (int col = 0; col < WorkSpace.wightGame; col++)
         {
-            for (int row = 0; row < 20; row++)
+            for (int row = 0; row < WorkSpace.hightGame; row++)
             {
                pointMap[row,col] = new Point(0,0,' ');  
             }
@@ -22,44 +24,48 @@ static public class Game
 
     }
 
+
+    //метод двигает фигуру в массиве poinMap (рабочая область)
+
     static public void FillPointMap()
     {
 
         //Получим крайние точки фигуры по вертикали и горизонтали
-        Shape.extremPoints extremP;
-        extremP = currentShape.FindExtrem();     
+        //Shape.extremPoints extremP;
+        //extremP = currentShape.FindExtrem();     
 
-        for (int col = extremP.leftPointPosition; col < extremP.rightPointPosition+1; col++)
+        //Обходим в цикле фигуру и переносим ее в массив рабочей области
+        for (int col = currentShape.currentExtremPoints.leftPointPosition; col < currentShape.currentExtremPoints.rightPointPosition+1; col++)
         {
-            for (int row = 0; row < extremP.topPointPosition+1; row++)
+            for (int row = 0; row < currentShape.currentExtremPoints.topPointPosition+1; row++)
             {
                  pointMap[currentShape.positionY+row,currentShape.positionX-2+col] = currentShape.shapeMap[row,col];
 
 
-                //отладка
+                //отладка Проверяем позиционирование
                 Console.SetCursorPosition(80,1);
-                Console.Write($"X = {currentShape.positionX+col} Y = {currentShape.positionY+row}");
+                Console.Write($"X = {currentShape.positionX} Y = {currentShape.positionY}");
 
 
             }
         }
 
+        //Отладака Проверяем крайние точки фигуры    
         Console.SetCursorPosition(80,2);
-        Console.Write($"left = {extremP.leftPointPosition} right = {extremP.rightPointPosition} top = {extremP.topPointPosition}");
+        Console.Write($"left = {currentShape.currentExtremPoints.leftPointPosition} right = {currentShape.currentExtremPoints.rightPointPosition} top = {currentShape.currentExtremPoints.topPointPosition}");
 
 
     }
 
-    static public void ClearPointMap()
+    static public void ClearPointMap() 
     {
         
         //Получим крайние точки фигуры по вертикали и горизонтали
-        Shape.extremPoints extremP;
-        extremP = currentShape.FindExtrem();    
+        //currentShape.FindExtrem();    
         
-       for (int col = extremP.leftPointPosition; col < extremP.rightPointPosition+1; col++)
+       for (int col = currentShape.currentExtremPoints.leftPointPosition; col < currentShape.currentExtremPoints.rightPointPosition+1; col++)
         {
-            for (int row = 0; row < extremP.topPointPosition+1; row++)
+            for (int row = 0; row < currentShape.currentExtremPoints.topPointPosition+1; row++)
              {
                pointMap[currentShape.positionY+row,currentShape.positionX-2+col] = new Point(0,0,' ');
 
@@ -68,6 +74,9 @@ static public class Game
 
 
     }
+
+    
+
 
     static public void ShowPointMap()
     {
@@ -81,6 +90,9 @@ static public class Game
         }
 
     }
+
+
+    
 
 
 

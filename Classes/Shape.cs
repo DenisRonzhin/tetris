@@ -40,6 +40,8 @@ public class Shape
         
         }
 
+        public extremPoints currentExtremPoints {get;set;}
+
           
         
         public Shape(char visibleSymbol, int x, int y )
@@ -182,10 +184,17 @@ public class Shape
                 
             }
  
+
+            //Заполним крайние точки фигуры
+            FindExtrem();
+
         }
 
+
+
+
         //Метод для поиска границ фигуры
-        public extremPoints FindExtrem()
+        void FindExtrem()
         {
             int minX = 4;
             int maxX = 0;
@@ -204,7 +213,7 @@ public class Shape
 
             }
 
-            return new extremPoints(minX,maxX,maxY); 
+            currentExtremPoints = new extremPoints(minX,maxX,maxY); 
 
         }
 
@@ -221,7 +230,7 @@ public class Shape
                    
                     if (shapeMap[row,col].visibility == 1) { if (drOption == drawingOption.clear) shapeMap[row,col].ClearPoint(); else shapeMap[row,col].DrawPoint();}
                 
-                    Console.SetCursorPosition(positionX,positionY);                                   
+                    Console.SetCursorPosition(positionX+currentExtremPoints.leftPointPosition,positionY);                                   
                 }
 
             }    
@@ -230,12 +239,39 @@ public class Shape
 
         }
 
+        //Функция проверяет достигла ли фигура границ левой стенки
+        bool CheckMooveLeft()
+        {
+            bool mooveAllowed;
+            
+            if (positionX+currentExtremPoints.leftPointPosition > 2)  mooveAllowed = true; 
+            
+            else  mooveAllowed = false; 
+
+            return mooveAllowed;       
+        }
+
+        //Функция проверяет достигла ли фигура границ правой стенки
+        bool CheckMooveRight()
+        {
+            bool mooveAllowed;
+            
+            if (positionX+currentExtremPoints.rightPointPosition < WorkSpace.wightGame)  mooveAllowed = true; 
+            
+            else  mooveAllowed = false; 
+
+            return mooveAllowed;       
+        }
+
+
+
+
         public int ChooseShape()
         {
 
             Random randomShape = new Random();
            
-            int numberShape = randomShape.Next(1,7);   
+            int numberShape = randomShape.Next(1,7); //фигуры с 1 по 7
 
             return numberShape;
 
@@ -249,12 +285,12 @@ public class Shape
 
         public void MooveShapeleft()
         {
-            positionX--;
+           if (CheckMooveLeft()) positionX--;
         }
 
         public void MooveShapeRight()
         {
-            positionX++;
+            if (CheckMooveRight()) positionX++;
         }
 
 
