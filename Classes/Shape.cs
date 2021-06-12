@@ -221,16 +221,18 @@ public class Shape
         //параметр drOption - вариант отрисовки фигуры. clear - стереть, draw - отобразить на экране
 
         public void DrawShape(drawingOption drOption)
+        
         {
-            for (int col = 0; col < 4; col++)
+            //Начнем отрисовку с крайних точек фигуры
+            for (int col = currentExtremPoints.leftPointPosition; col < currentExtremPoints.rightPointPosition+1; col++)
             {
-                for (int row = 0; row< 4; row++)
+                for (int row = 0; row < currentExtremPoints.topPointPosition+1; row++)
                 {
                     Console.SetCursorPosition(positionX+col,positionY+row);
                    
                     if (shapeMap[row,col].visibility == 1) { if (drOption == drawingOption.clear) shapeMap[row,col].ClearPoint(); else shapeMap[row,col].DrawPoint();}
                 
-                    Console.SetCursorPosition(positionX+currentExtremPoints.leftPointPosition,positionY);                                   
+                    SetCursor();                                   
                 }
 
             }    
@@ -239,12 +241,19 @@ public class Shape
 
         }
 
+        //Метод выравнивает положение курсора. Курсор уходит вперед и стрирает стены
+        public void SetCursor()
+        {
+            Console.SetCursorPosition(positionX+currentExtremPoints.leftPointPosition,positionY);
+        }
+
+
         //Функция проверяет достигла ли фигура границ левой стенки
         bool CheckMooveLeft()
         {
             bool mooveAllowed;
             
-            if (positionX+currentExtremPoints.leftPointPosition > 2)  mooveAllowed = true; 
+            if (positionX-2+currentExtremPoints.leftPointPosition > 0)  mooveAllowed = true; 
             
             else  mooveAllowed = false; 
 
@@ -256,7 +265,7 @@ public class Shape
         {
             bool mooveAllowed;
             
-            if (positionX+currentExtremPoints.rightPointPosition < WorkSpace.wightGame)  mooveAllowed = true; 
+            if (positionX-1+currentExtremPoints.rightPointPosition < WorkSpace.wightGame)  mooveAllowed = true; 
             
             else  mooveAllowed = false; 
 

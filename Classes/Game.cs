@@ -30,10 +30,6 @@ static public class Game
     static public void FillPointMap()
     {
 
-        //Получим крайние точки фигуры по вертикали и горизонтали
-        //Shape.extremPoints extremP;
-        //extremP = currentShape.FindExtrem();     
-
         //Обходим в цикле фигуру и переносим ее в массив рабочей области
         for (int col = currentShape.currentExtremPoints.leftPointPosition; col < currentShape.currentExtremPoints.rightPointPosition+1; col++)
         {
@@ -77,12 +73,13 @@ static public class Game
 
     
 
-
+    //Отрисовка игрового поля
+    
     static public void ShowPointMap()
     {
-        for (int col = 0; col < 20; col++)
+        for (int col = 0; col < WorkSpace.wightGame; col++)
         {
-            for (int row = 0; row < 20; row++)
+            for (int row = 0; row < WorkSpace.hightGame; row++)
             {
                 Console.SetCursorPosition(50+col,row);
                 pointMap[row,col].DrawPoint();

@@ -54,7 +54,7 @@ namespace tetris
                     
                            ConsoleKeyInf = Console.ReadKey();
 
-                           Console.SetCursorPosition(MyShape.positionX,MyShape.positionY); // затычка, курсор убегает, стирает стены 
+                           MyShape.SetCursor(); // затычка, курсор убегает, стирает стены 
        
                        };
 
@@ -70,22 +70,31 @@ namespace tetris
                       switch(ConsoleKeyInf.Key)
     
                          { 
-                             case ConsoleKey.LeftArrow:
-                                 {
-                                     MyShape.DrawShape(Shape.drawingOption.clear);             
-                                     Game.ClearPointMap();
-                                     MyShape.MooveShapeleft();   
-                    
-                                     break;
-                                 }
-                             case ConsoleKey.RightArrow: 
+                            case ConsoleKey.LeftArrow:
+                                {
+                                    MyShape.DrawShape(Shape.drawingOption.clear);             
+                                    Game.ClearPointMap();
+                                    MyShape.MooveShapeleft();   
+                
+                                    break;
+                                }
+                            case ConsoleKey.RightArrow: 
+                                {
+                                    MyShape.DrawShape(Shape.drawingOption.clear);
+                                    Game.ClearPointMap();            
+                                    MyShape.MooveShapeRight();   
+                                    break;
+                                }
+
+                            case ConsoleKey.Spacebar:
+
                                  {
                                      MyShape.DrawShape(Shape.drawingOption.clear);
                                      Game.ClearPointMap();            
-                                     MyShape.MooveShapeRight();   
+                                     MyShape.CreateShape();
                                      break;
                                  }
-                      
+    
                         
                          } 
                       MyShape.DrawShape(Shape.drawingOption.clear);             

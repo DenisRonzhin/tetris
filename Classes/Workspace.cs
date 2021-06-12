@@ -22,30 +22,30 @@ static public class WorkSpace
     {
 
         // горизонтальные линии
-        //for (int i = 1; i<=x; i++)
-        //{
+        // for (int i = 2; i<=wightGame+1; i++)
+        // {
 
-            // Console.SetCursorPosition(i,1);
-            // Console.Write(''); 
+        //     //  Console.SetCursorPosition(i,0);
+        //     //  Console.Write($"{1}"); 
 
-            //Console.SetCursorPosition(i,y);
-            //Console.Write('_'); 
+        //     //Console.SetCursorPosition(i,y);
+        //     //Console.Write('_'); 
 
-        //}
+        // }
 
 
         // Вертикальные линии
 
-        for (int i =1; i<=hightGame; i++)
+        for (int i = 0; i<=hightGame; i++)
         {
             Console.SetCursorPosition(1,i);
             Console.Write('|'); 
 
-            Console.SetCursorPosition(2,i);
-            Console.Write($"{i}"); 
+          //  Console.SetCursorPosition(2,i);
+          //  Console.Write($"{i}"); 
 
 
-            Console.SetCursorPosition(wightGame+1,i);
+            Console.SetCursorPosition(wightGame+2,i); // отступ слева + 1 символ и справа на +1 символ. Между крайними точками расстояние = wightGame
             Console.Write('|'); 
 
             Console.SetCursorPosition(wightForm,i);
