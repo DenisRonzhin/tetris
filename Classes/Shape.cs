@@ -85,7 +85,7 @@ public class Shape
     
             tShape = (typeShape)ChooseShape();    
 
-            switch(tShape)
+            switch(typeShape.S)
             {
                 //     
                 // ##
@@ -265,23 +265,33 @@ public class Shape
                 for (int row = 0; row < currentExtremPoints.topPointPosition+1; row++)
                 {
                         {
-                            // налетели на фигуру в массиве PointMap
-                            if (Game.pointMap[positionY+row,positionX-2+col].visibility == 1) 
+                            // налетели на фигуру в массиве PointMap при движении вниз
+                            if ((Game.pointMap[positionY+row,positionX-2+col].visibility == 1) && (shapeMap[row,col].visibility==1) && (allowMovement.top))
                              { 
                                 allowMovement.top = false; 
-                                //positionX = previousPositionX;
+                                //Если налетели, откатываемся на шаг назад
                                 positionY = previousPositionY;
                              }  
+
+                            // проверяем упремся на следующем шаге в фигуру при движении вправо или нет    
+                            if ((positionX-2+col+1) <= 19 && (Game.pointMap[positionY+row,positionX-2+col+1].visibility == 1) ) 
+                             { 
+                                allowMovement.right = false; 
+                             }  
+                         
+                            // проверяем упремся на следующем шаге в фигуру при движении влево или нет    
+                            if ((positionX-2+col-1) >= 0 && (Game.pointMap[positionY+row,positionX-2+col-1].visibility == 1) ) 
+                             { 
+                                allowMovement.left = false; 
+                             }  
+
+
                         } 
                   
                 }
             }
 
-
-
             return allowMovement;
-
-
 
         }
 
@@ -320,7 +330,7 @@ public class Shape
                     else
                 
                     {
-                         Game.pointMap[positionY+row,positionX-2+col] = new Point(0,0,' ');
+                        Game.pointMap[positionY+row,positionX-2+col] = new Point(0,0,' ');
                     }
 
             }

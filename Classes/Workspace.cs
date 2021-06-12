@@ -36,13 +36,13 @@ static public class WorkSpace
 
         // Вертикальные линии
 
-        for (int i = 0; i<=hightGame; i++)
+        for (int i = 0; i< hightGame; i++)
         {
             Console.SetCursorPosition(1,i);
             Console.Write('|'); 
 
-          //  Console.SetCursorPosition(2,i);
-          //  Console.Write($"{i}"); 
+        //    Console.SetCursorPosition(2,i);
+        //    Console.Write($"{i}"); 
 
 
             Console.SetCursorPosition(wightGame+2,i); // отступ слева + 1 символ и справа на +1 символ. Между крайними точками расстояние = wightGame
