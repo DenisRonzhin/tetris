@@ -3,13 +3,8 @@ using System;
 public class Shape 
     {
         public char vsb {get;set;}
-        
-        public enum drawingOption
-        {
-          clear,
-          draw      
-        }
-
+        public enum actionType {AddPointMap, RemovePointMap}
+ 
         public enum typeShape 
             {
                 O = 1,
@@ -22,7 +17,6 @@ public class Shape
             }       
 
         public typeShape tShape {get;set;} 
-
 
         //Структура хранит крайние индексы фигуры в массиве 4x4 
         public struct extremPoints
@@ -217,29 +211,7 @@ public class Shape
 
         }
 
-        //positionX, positionY - текущая позиция массива с фигурой
-        //параметр drOption - вариант отрисовки фигуры. clear - стереть, draw - отобразить на экране
-
-        public void DrawShape(drawingOption drOption)
-        
-        {
-            //Начнем отрисовку с крайних точек фигуры
-            for (int col = currentExtremPoints.leftPointPosition; col < currentExtremPoints.rightPointPosition+1; col++)
-            {
-                for (int row = 0; row < currentExtremPoints.topPointPosition+1; row++)
-                {
-                    Console.SetCursorPosition(positionX+col,positionY+row);
-                   
-                    if (shapeMap[row,col].visibility == 1) { if (drOption == drawingOption.clear) shapeMap[row,col].ClearPoint(); else shapeMap[row,col].DrawPoint();}
-                
-                    SetCursor();                                   
-                }
-
-            }    
-
-            Console.CursorVisible = false;
-
-        }
+       
 
         //Метод выравнивает положение курсора. Курсор уходит вперед и стрирает стены
         public void SetCursor()
@@ -279,10 +251,37 @@ public class Shape
         {
 
             Random randomShape = new Random();
-           
+            
             int numberShape = randomShape.Next(1,7); //фигуры с 1 по 7
 
             return numberShape;
+
+        }
+
+        public void AddShapePointMap(actionType actionType_)
+        {
+        //Обходим в цикле фигуру и переносим ее в массив рабочей области
+        for (int col = currentExtremPoints.leftPointPosition; col < currentExtremPoints.rightPointPosition+1; col++)
+        {
+            for (int row = 0; row < currentExtremPoints.topPointPosition+1; row++)
+            {
+                    if (actionType_ == actionType.AddPointMap)
+                    {
+                    Game.pointMap[positionY+row,positionX-2+col] = shapeMap[row,col];
+                    Console.SetCursorPosition(80,1);
+                    Console.Write($"X = {positionX} Y = {positionY}");
+                    } 
+                    else
+                    {
+                    Game.pointMap[positionY+row,positionX-2+col] = new Point(0,0,' ');
+                    }
+
+            }
+        }
+
+        //Отладака Проверяем крайние точки фигуры    
+        Console.SetCursorPosition(80,2);
+        Console.Write($"left = {currentExtremPoints.leftPointPosition} right = {currentExtremPoints.rightPointPosition} top = {currentExtremPoints.topPointPosition}");
 
         }
 

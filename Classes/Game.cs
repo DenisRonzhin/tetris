@@ -4,6 +4,7 @@ static public class Game
 {
 
 
+    public enum actionType {AddPointMap, RemovePointMap}
 
     static public int score {get;set;}
     static public int speed {get;set;}
@@ -23,78 +24,29 @@ static public class Game
         }
 
     }
-
-
-    //метод двигает фигуру в массиве poinMap (рабочая область)
-
-    static public void FillPointMap()
-    {
-
-        //Обходим в цикле фигуру и переносим ее в массив рабочей области
-        for (int col = currentShape.currentExtremPoints.leftPointPosition; col < currentShape.currentExtremPoints.rightPointPosition+1; col++)
-        {
-            for (int row = 0; row < currentShape.currentExtremPoints.topPointPosition+1; row++)
-            {
-                 pointMap[currentShape.positionY+row,currentShape.positionX-2+col] = currentShape.shapeMap[row,col];
-
-
-                //отладка Проверяем позиционирование
-                Console.SetCursorPosition(80,1);
-                Console.Write($"X = {currentShape.positionX} Y = {currentShape.positionY}");
-
-
-            }
-        }
-
-        //Отладака Проверяем крайние точки фигуры    
-        Console.SetCursorPosition(80,2);
-        Console.Write($"left = {currentShape.currentExtremPoints.leftPointPosition} right = {currentShape.currentExtremPoints.rightPointPosition} top = {currentShape.currentExtremPoints.topPointPosition}");
-
-
-    }
-
-    static public void ClearPointMap() 
-    {
-        
-        //Получим крайние точки фигуры по вертикали и горизонтали
-        //currentShape.FindExtrem();    
-        
-       for (int col = currentShape.currentExtremPoints.leftPointPosition; col < currentShape.currentExtremPoints.rightPointPosition+1; col++)
-        {
-            for (int row = 0; row < currentShape.currentExtremPoints.topPointPosition+1; row++)
-             {
-               pointMap[currentShape.positionY+row,currentShape.positionX-2+col] = new Point(0,0,' ');
-
-            }
-        }
-
-
-    }
-
     
 
-    //Отрисовка игрового поля
-    
+
+    //метод вставляет/удаляет фигуру в массив poinMap (рабочая область)
+    //
+
+  
+
+    //Полная отрисовка игрового поля с фигурами 
+
     static public void ShowPointMap()
     {
         for (int col = 0; col < WorkSpace.wightGame; col++)
         {
             for (int row = 0; row < WorkSpace.hightGame; row++)
             {
-                Console.SetCursorPosition(50+col,row);
+                Console.SetCursorPosition(2+col,row);
                 pointMap[row,col].DrawPoint();
+                Console.SetCursorPosition(25,0); // глючит курсор, стирает часть стены. Загоним его в область где нет символов.
             }
         }
 
     }
-
-
-    
-
-
-
-
-
 
     static public void AddScore()
     {
@@ -124,7 +76,6 @@ static public class Game
 
         Console.SetCursorPosition(24,10);
         Console.Write("NEXT SHAPE");
-
 
     }
 

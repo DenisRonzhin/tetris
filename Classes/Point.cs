@@ -17,12 +17,17 @@
         public void DrawPoint()
         {
             Console.Write(symbol);
+        
+            Console.CursorVisible = false;
         }
 
         public void ClearPoint()
         {
             Console.Write(' ');
+            Console.CursorVisible = false;
         }
+
+
 
     } 
    
