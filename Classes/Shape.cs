@@ -5,6 +5,25 @@ public class Shape
         public char vsb {get;set;}
         public enum actionType {AddPointMap, RemovePointMap}
  
+            
+
+        public struct allowMovementType
+        { 
+           public bool left;
+           public bool right;
+           public bool top;
+        
+           public allowMovementType(bool left_, bool right_, bool top_)
+           {
+               this.left = left_;
+               this.right = right_;
+               this.top = top_;
+           }
+        }     
+
+        public allowMovementType allowMovement; 
+
+
         public enum typeShape 
             {
                 O = 1,
@@ -32,18 +51,22 @@ public class Shape
                 this.topPointPosition = topPointPosition;
             }
         
+
+
         }
 
         public extremPoints currentExtremPoints {get;set;}
 
-          
-        
+       
+        // конструктор класса, создание фигуры
         public Shape(char visibleSymbol, int x, int y )
         {
             vsb = visibleSymbol;
 
             positionX = x;
             positionY = y;
+
+            allowMovement = new allowMovementType(true,true,true);   
 
         }
     
@@ -52,9 +75,14 @@ public class Shape
         public int positionX {set;get;} 
         public int positionY {set;get;} 
            
+        int previousPositionX;
+        int previousPositionY;
+         
 
         public void CreateShape()
         {
+
+    
             tShape = (typeShape)ChooseShape();    
 
             switch(tShape)
@@ -220,30 +248,42 @@ public class Shape
         }
 
 
-        //Функция проверяет достигла ли фигура границ левой стенки
-        bool CheckMooveLeft()
+        //Функция проверяет возможность движения лево,право,вниз
+        public allowMovementType CheckCollision()
         {
-            bool mooveAllowed;
-            
-            if (positionX-2+currentExtremPoints.leftPointPosition > 0)  mooveAllowed = true; 
-            
-            else  mooveAllowed = false; 
 
-            return mooveAllowed;       
+            if (positionX-2+currentExtremPoints.leftPointPosition > 0) allowMovement.left = true; else allowMovement.left = false;
+            
+            if (positionX-1+currentExtremPoints.rightPointPosition < WorkSpace.wightGame) allowMovement.right = true; else allowMovement.right = false; 
+            
+            if (positionY + currentExtremPoints.topPointPosition  < WorkSpace.hightGame-1) allowMovement.top = true; else allowMovement.top = false; 
+
+        
+            //Обходим в цикле фигуру и переносим ее в массив рабочей области
+            for (int col = currentExtremPoints.leftPointPosition; col < currentExtremPoints.rightPointPosition+1; col++)
+            {
+                for (int row = 0; row < currentExtremPoints.topPointPosition+1; row++)
+                {
+                        {
+                            // налетели на фигуру в массиве PointMap
+                            if (Game.pointMap[positionY+row,positionX-2+col].visibility == 1) 
+                             { 
+                                allowMovement.top = false; 
+                                //positionX = previousPositionX;
+                                positionY = previousPositionY;
+                             }  
+                        } 
+                  
+                }
+            }
+
+
+
+            return allowMovement;
+
+
+
         }
-
-        //Функция проверяет достигла ли фигура границ правой стенки
-        bool CheckMooveRight()
-        {
-            bool mooveAllowed;
-            
-            if (positionX-1+currentExtremPoints.rightPointPosition < WorkSpace.wightGame)  mooveAllowed = true; 
-            
-            else  mooveAllowed = false; 
-
-            return mooveAllowed;       
-        }
-
 
 
 
@@ -265,15 +305,22 @@ public class Shape
         {
             for (int row = 0; row < currentExtremPoints.topPointPosition+1; row++)
             {
+
+
                     if (actionType_ == actionType.AddPointMap)
+                
                     {
-                    Game.pointMap[positionY+row,positionX-2+col] = shapeMap[row,col];
-                    Console.SetCursorPosition(80,1);
-                    Console.Write($"X = {positionX} Y = {positionY}");
+                        if (shapeMap[row,col].visibility == 1) Game.pointMap[positionY+row,positionX-2+col] = shapeMap[row,col];
+                        
+                        Console.SetCursorPosition(80,1);
+                        Console.Write($"X = {positionX} Y = {positionY}");
+                
                     } 
+                
                     else
+                
                     {
-                    Game.pointMap[positionY+row,positionX-2+col] = new Point(0,0,' ');
+                         Game.pointMap[positionY+row,positionX-2+col] = new Point(0,0,' ');
                     }
 
             }
@@ -288,17 +335,31 @@ public class Shape
 
         public void MooveShapeDown()
         {
-            positionY++;
+            if (CheckCollision().top) 
+            {
+               // Game.previousPointMap = Game.pointMap.Clone();
+                previousPositionY = positionY;       
+                positionY++;
+                CheckCollision();
+            }
         }
 
         public void MooveShapeleft()
         {
-           if (CheckMooveLeft()) positionX--;
+           if (CheckCollision().left) 
+           {
+               previousPositionX = positionX;
+               positionX--;
+           }
         }
 
         public void MooveShapeRight()
         {
-            if (CheckMooveRight()) positionX++;
+            if (CheckCollision().right)
+            {   
+                previousPositionX = positionX;
+                positionX++;
+            }
         }
 
 

@@ -9,6 +9,9 @@ static public class Game
     static public int score {get;set;}
     static public int speed {get;set;}
     static public Point[,] pointMap = new Point[WorkSpace.hightGame,WorkSpace.wightGame];
+
+    static public Point[,] previousPointMap = new Point[WorkSpace.hightGame,WorkSpace.wightGame];
+
     static public Shape currentShape {get; set;}
     
     //Заполняем стакан нулевыми элементами
@@ -47,6 +50,22 @@ static public class Game
         }
 
     }
+
+    //метод делает копию массива с фигурами. 
+    static public void CopyPointMap()
+    {
+
+        previousPointMap = (Point[,])pointMap.Clone();
+
+    }
+
+    static public void ReturnPreviousPointMap()
+    {
+        pointMap = (Point[,])previousPointMap.Clone();
+
+    }
+
+
 
     static public void AddScore()
     {

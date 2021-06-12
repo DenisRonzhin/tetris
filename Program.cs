@@ -29,7 +29,6 @@ namespace tetris
 
             while (true)
                  {
-
                         if (Console.KeyAvailable)
                         {
 
@@ -42,7 +41,7 @@ namespace tetris
 
 
 
-                        delayTimer  = delayGame(150);  
+                        delayTimer  = delayGame(250);  
 
 
                         //алгоритм отрисовки: стираем, меняем координаты, рисуем по новой.
@@ -78,6 +77,16 @@ namespace tetris
                         MyShape.MooveShapeDown();
                         MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
                         Game.ShowPointMap(); 
+                       
+                        if (MyShape.allowMovement.top == false)
+                        {
+                            MyShape = new Shape('#',12,1);
+                            MyShape.CreateShape();
+                            Game.currentShape = MyShape;
+                            MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
+                        
+                        }
+                       
                         ConsoleKeyInf = new ConsoleKeyInfo();       
   
                  }  
