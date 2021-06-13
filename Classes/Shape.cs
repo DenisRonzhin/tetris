@@ -212,7 +212,23 @@ public class Shape
 
         }
 
+        //Метод отрисовывает следующую фигуру
 
+        public void DrawNextShape()
+        {
+            for (int row = 0; row < 4; row++)
+            {
+
+               Console.SetCursorPosition(27,11+row);     
+
+               for (int col = 0; col < 4; col++)
+               {
+                  if (shapeMap[row,col].visibility == 1) shapeMap[row,col].DrawPoint(); else shapeMap[row,col].ClearPoint();
+               }     
+
+            }
+
+        }
 
 
         //Метод для поиска границ фигуры
@@ -252,37 +268,43 @@ public class Shape
         public allowMovementType CheckCollision()
         {
 
+            //Проверяем налетели на стенки или нет и дошли ли до конца   
             if (positionX-2+currentExtremPoints.leftPointPosition > 0) allowMovement.left = true; else allowMovement.left = false;
             
             if (positionX-1+currentExtremPoints.rightPointPosition < WorkSpace.wightGame) allowMovement.right = true; else allowMovement.right = false; 
             
-            if (positionY + currentExtremPoints.topPointPosition  < WorkSpace.hightGame-1) allowMovement.top = true; else allowMovement.top = false; 
-
-        
+            if (positionY < WorkSpace.hightGame) allowMovement.top = true; else 
+            
+            {
+             allowMovement.top = false;
+             positionY = previousPositionY;
+            };
+                      
+            //Проверяем столкновение с другими фигурами
             //Обходим в цикле фигуру и переносим ее в массив рабочей области
             for (int col = currentExtremPoints.leftPointPosition; col < currentExtremPoints.rightPointPosition+1; col++)
             {
-                for (int row = 0; row < currentExtremPoints.topPointPosition+1; row++)
+                for (int row = 0; row <= Math.Min(positionY,currentExtremPoints.topPointPosition); row++)
                 {
                         {
                             // налетели на фигуру в массиве PointMap при движении вниз
-                            if ((Game.pointMap[positionY+row,positionX-2+col].visibility == 1) && (shapeMap[row,col].visibility==1) )
+                           
+                            if ((Game.pointMap[positionY-row,positionX-2+col].visibility == 1) && (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility==1) )
+                            
                              { 
                                 allowMovement.top = false; 
                                 //Если налетели, откатываемся на шаг назад
                                 positionY = previousPositionY;
-                                //AddShapePointMap(actionType.AddPointMap);
-
                              }  
 
-                            // проверяем упремся на следующем шаге в фигуру при движении вправо или нет    
-                            if ((positionX-2+col+1) <= 19 && (Game.pointMap[positionY+row,positionX-2+col+1].visibility == 1) ) 
+                            //проверяем упремся на следующем шаге в фигуру при движении вправо или нет    
+                            if ((positionX-2+col+1) <= 19 && (Game.pointMap[positionY-row,positionX-2+col+1].visibility == 1) && (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility==1)) 
                              { 
                                 allowMovement.right = false; 
                              }  
                          
                             // проверяем упремся на следующем шаге в фигуру при движении влево или нет    
-                            if ((positionX-2+col-1) >= 0 && (Game.pointMap[positionY+row,positionX-2+col-1].visibility == 1) ) 
+                            if ((positionX-2+col-1) >= 0 && (Game.pointMap[positionY-row,positionX-2+col-1].visibility == 1) && (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility==1) ) 
                              { 
                                 allowMovement.left = false; 
                              }  
@@ -315,32 +337,37 @@ public class Shape
         //Обходим в цикле фигуру и переносим ее в массив рабочей области
         for (int col = currentExtremPoints.leftPointPosition; col < currentExtremPoints.rightPointPosition+1; col++)
         {
-            for (int row = 0; row < currentExtremPoints.topPointPosition+1; row++)
+            //for (int row = 0; row < Math.Min(positionY,currentExtremPoints.topPointPosition+1); row++)
+           
+           for (int row = 0; row <= Math.Min(positionY,currentExtremPoints.topPointPosition); row++)
+           
             {
 
 
                     if (actionType_ == actionType.AddPointMap)
                 
                     {
-                        if (shapeMap[row,col].visibility == 1) Game.pointMap[positionY+row,positionX-2+col] = shapeMap[row,col];
-                        
-                        Console.SetCursorPosition(80,1);
-                        Console.Write($"X = {positionX} Y = {positionY}");
+                        if (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col] = shapeMap[currentExtremPoints.topPointPosition-row,col];
+
+
+                        //Для отладки 
+                        // Console.SetCursorPosition(80,1);
+                        // Console.Write($"X = {positionX} Y = {positionY}      ");
                 
                     } 
                 
                     else
                 
                     {
-                        if (shapeMap[row,col].visibility == 1) Game.pointMap[positionY+row,positionX-2+col] = new Point(0,0,' ');
+                        if (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col]  = new Point(0,0,' ');
                     }
 
             }
         }
 
         //Отладака Проверяем крайние точки фигуры    
-        Console.SetCursorPosition(80,2);
-        Console.Write($"left = {currentExtremPoints.leftPointPosition} right = {currentExtremPoints.rightPointPosition} top = {currentExtremPoints.topPointPosition}");
+        // Console.SetCursorPosition(80,2);
+        // Console.Write($"left = {currentExtremPoints.leftPointPosition} right = {currentExtremPoints.rightPointPosition} top = {currentExtremPoints.topPointPosition}");
 
         }
 
@@ -362,7 +389,7 @@ public class Shape
            {
                previousPositionX = positionX;
                positionX--;
-           }
+           } 
         }
 
         public void MooveShapeRight()
@@ -371,7 +398,7 @@ public class Shape
             {   
                 previousPositionX = positionX;
                 positionX++;
-            }
+            } 
         }
 
 

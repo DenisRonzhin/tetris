@@ -7,14 +7,13 @@ namespace tetris
     {
         static void Main(string[] args)
         {
-            
-            int speedGame = 500;
+
+            int skip = 0;    
 
             WorkSpace.InintWindowsSize();
             WorkSpace.DrawWall();
 
             Game.score = 0;
-            Game.speed = 1;
             Game.DrawIndicators(); 
     
             Shape MyShape;
@@ -22,9 +21,14 @@ namespace tetris
             MyShape = new Shape((char)164,12,0);
             MyShape.CreateShape();
 
+            Shape NextShape;
+            NextShape = new Shape((char)164,12,0);
+            NextShape.CreateShape();
+            
             Game.currentShape = MyShape;
             Game.InitPointMap();
             MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
+            NextShape.DrawNextShape();
 
             Task delayTimer = Task.CompletedTask;
 
@@ -97,14 +101,26 @@ namespace tetris
                         Game.ShowPointMap(); 
     
                        
-                        if (MyShape.allowMovement.top == false)
+                        if (MyShape.allowMovement.top == false) 
                         {
-                            MyShape = new Shape((char)164,12,0);
-                            MyShape.CreateShape();
-                            Game.currentShape = MyShape;
-                            MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
-                            delayTimer  = delayGame(500);
+                            skip++;
+                            delayTimer  = delayGame(200);
                         
+                            if (skip == 3)
+                                {
+                                skip = 0;        
+                                MyShape = NextShape;
+                                //MyShape.CreateShape();
+                                Game.currentShape = MyShape;
+                                MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
+                                delayTimer  = delayGame(500);
+
+                                NextShape = new Shape((char)164,12,0);
+                                NextShape.CreateShape();
+                                NextShape.DrawNextShape();
+
+                                }
+                          
                         }
                        
                         ConsoleKeyInf = new ConsoleKeyInfo();       

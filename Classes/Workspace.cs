@@ -13,7 +13,7 @@ static public class WorkSpace
        Console.ForegroundColor = ConsoleColor.Green; 
        Console.Clear(); 
       
-       Console.SetWindowSize(100, hightGame); // исправить 100 на wightForm
+       Console.SetWindowSize(wightForm, hightGame); // исправить 100 на wightForm
     
 
     }

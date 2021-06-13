@@ -38,7 +38,7 @@ static public class Game
         {
             for (int row = 0; row < WorkSpace.hightGame; row++)
             {
-                Console.SetCursorPosition(2+col,row);
+                Console.SetCursorPosition(col+2,row);
                 pointMap[row,col].DrawPoint();
                 Console.SetCursorPosition(25,0); // глючит курсор, стирает часть стены. Загоним его в область где нет символов.
             }
