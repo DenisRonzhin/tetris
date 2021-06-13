@@ -85,7 +85,7 @@ public class Shape
     
             tShape = (typeShape)ChooseShape();    
 
-            switch(typeShape.S)
+            switch(tShape)
             {
                 //     
                 // ##
@@ -266,11 +266,13 @@ public class Shape
                 {
                         {
                             // налетели на фигуру в массиве PointMap при движении вниз
-                            if ((Game.pointMap[positionY+row,positionX-2+col].visibility == 1) && (shapeMap[row,col].visibility==1) && (allowMovement.top))
+                            if ((Game.pointMap[positionY+row,positionX-2+col].visibility == 1) && (shapeMap[row,col].visibility==1) )
                              { 
                                 allowMovement.top = false; 
                                 //Если налетели, откатываемся на шаг назад
                                 positionY = previousPositionY;
+                                //AddShapePointMap(actionType.AddPointMap);
+
                              }  
 
                             // проверяем упремся на следующем шаге в фигуру при движении вправо или нет    
@@ -330,7 +332,7 @@ public class Shape
                     else
                 
                     {
-                        Game.pointMap[positionY+row,positionX-2+col] = new Point(0,0,' ');
+                        if (shapeMap[row,col].visibility == 1) Game.pointMap[positionY+row,positionX-2+col] = new Point(0,0,' ');
                     }
 
             }

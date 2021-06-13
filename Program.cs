@@ -16,7 +16,7 @@ namespace tetris
     
             Shape MyShape;
 
-            MyShape = new Shape('#',12,1);
+            MyShape = new Shape((char)164,12,1);
             MyShape.CreateShape();
 
             Game.currentShape = MyShape;
@@ -71,16 +71,21 @@ namespace tetris
                             break;
                             }
 
-
+                        default:
+                            {
+                                MyShape.AddShapePointMap(Shape.actionType.RemovePointMap); 
+                                MyShape.MooveShapeDown();
+                                break;
+                            }    
+ 
                         } 
-                        MyShape.AddShapePointMap(Shape.actionType.RemovePointMap); 
-                        MyShape.MooveShapeDown();
+ 
                         MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
                         Game.ShowPointMap(); 
                        
                         if (MyShape.allowMovement.top == false)
                         {
-                            MyShape = new Shape('#',12,1);
+                            MyShape = new Shape((char)164,12,1);
                             MyShape.CreateShape();
                             Game.currentShape = MyShape;
                             MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
