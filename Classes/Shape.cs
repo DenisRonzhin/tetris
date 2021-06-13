@@ -59,7 +59,7 @@ public class Shape
 
        
         // конструктор класса, создание фигуры
-        public Shape(char visibleSymbol, int x, int y )
+        public  Shape(char visibleSymbol, int x, int y )
         {
             vsb = visibleSymbol;
 
