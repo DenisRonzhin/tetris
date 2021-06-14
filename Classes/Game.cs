@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 static public class Game
 {
@@ -6,8 +7,9 @@ static public class Game
     static public int score {get;set;}
     static public int speed {get;set;}
     static public Point[,] pointMap = new Point[WorkSpace.hightGame,WorkSpace.wightGame];
-
-    static public Shape currentShape {get; set;}
+    static Point[,] tempPointMap;  // Временный массив для сдвига заполненных строк
+    static List<int> fullRow = new List<int>{}; //Список хранит индексы заполненных строк массива 
+    //static public Shape currentShape {get; set;}
     
     //Заполняем стакан нулевыми элементами
     static public void InitPointMap()
@@ -22,11 +24,57 @@ static public class Game
         }
 
     }
-    
 
+    public static void CheckRow()
+    {
+        int fullRowCount = 0;
+        int currentRow = 0;
+        bool fullRow = false; 
 
-    //метод вставляет/удаляет фигуру в массив poinMap (рабочая область)
-    //
+        tempPointMap = new Point[WorkSpace.hightGame,WorkSpace.wightGame];
+
+        for (int col = 0; col < WorkSpace.wightGame; col++)
+        {
+            for (int row = 0; row < WorkSpace.hightGame; row++)
+            {
+               tempPointMap[row,col] = new Point(0,0,' ');  
+            }
+            
+        }
+
+        for (int row = 0; row < WorkSpace.hightGame; row++)
+        {
+        
+            fullRowCount = 0;
+
+            for (int col = 0; col < WorkSpace.wightGame ; col++)
+            {
+              
+               if (pointMap[row,col].visibility == 1) 
+               fullRowCount++;
+         
+            }
+
+            //заполним тестовый массив без заполненных строк
+            if (fullRowCount != WorkSpace.wightGame)
+            {
+                currentRow++;
+          
+                for (int col = 0; col < WorkSpace.wightGame ; col++)
+                {
+                
+                    tempPointMap[currentRow-1,col] = pointMap[row,col];
+
+                }
+            } else fullRow = true;
+
+        }
+
+        //Перезаполним исходный массив, если есть заполненные строки
+
+        if (fullRow) pointMap  = (Point[,])tempPointMap.Clone();
+
+    }
 
   
 
@@ -45,9 +93,6 @@ static public class Game
         }
 
     }
-
-  
-
 
 
     static public void AddScore()

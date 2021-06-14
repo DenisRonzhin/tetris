@@ -85,7 +85,7 @@ public class Shape
     
             tShape = (typeShape)ChooseShape();    
 
-            switch(tShape)
+            switch(typeShape.O)
             {
                 //     
                 // ##

@@ -25,7 +25,7 @@ namespace tetris
             NextShape = new Shape((char)164,12,0);
             NextShape.CreateShape();
             
-            Game.currentShape = MyShape;
+            //Game.currentShape = MyShape;
             Game.InitPointMap();
             MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
             NextShape.DrawNextShape();
@@ -103,15 +103,16 @@ namespace tetris
                        
                         if (MyShape.allowMovement.top == false) 
                         {
+                                
                             skip++;
                             delayTimer  = delayGame(200);
-                        
                             if (skip == 3)
                                 {
+                            
+                                Game.CheckRow();
                                 skip = 0;        
                                 MyShape = NextShape;
-                                //MyShape.CreateShape();
-                                Game.currentShape = MyShape;
+                              //  Game.currentShape = MyShape;
                                 MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
                                 delayTimer  = delayGame(500);
 
