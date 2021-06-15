@@ -1,5 +1,6 @@
 using System;
-using System.Collections.Generic;
+using System.Threading;
+
 
 static public class Game
 {
@@ -19,6 +20,70 @@ static public class Game
             }
         }
 
+    }
+
+
+    public static void ShowGameOver()
+    {
+
+       for (int row = WorkSpace.hightGame - 1; row >= 0; row--)
+       {
+            for (int col = 0; col < WorkSpace.wightGame; col++)
+            {
+                pointMap[row,col].visibility = 1;
+                Console.SetCursorPosition(col+2,row);
+                pointMap[row,col].DrawPoint();
+            }    
+
+            Thread.Sleep(30);
+
+        }
+
+       for (int row = 0; row < WorkSpace.hightGame; row++)
+       {
+            for (int col = 0; col < WorkSpace.wightGame; col++)
+            {
+                pointMap[row,col].visibility = 0;
+                Console.SetCursorPosition(col+2,row);
+                pointMap[row,col].DrawPoint();
+            }    
+
+            Thread.Sleep(30);
+
+        }
+
+        Console.SetCursorPosition(7,10);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.Write("GAME OVER");
+        
+
+    }
+
+    public static bool CheckGameOver()
+    {
+        int fillRow = 0;
+        for (int row = 0; row < WorkSpace.hightGame; row++)
+        {
+            for (int col = 0; col < WorkSpace.wightGame; col++)
+            {
+                if (pointMap[row,col].visibility==1)
+                {
+                    fillRow++;
+                    break;
+                }
+            }    
+
+        }       
+
+        if (fillRow == WorkSpace.hightGame)
+        {
+           
+           //ShowGameOver();
+
+           return true;
+           
+        }
+        else return false;
     }
 
     public static void CheckRow()
@@ -62,14 +127,23 @@ static public class Game
                     tempPointMap[currentRow,col] = pointMap[row,col];
 
                 }
-            } else fullRow = true;
+            } else 
+            
+            {
+                AddScore();
+                fullRow = true;
+            }   
 
         }
 
         //Перезаполним исходный массив, если есть заполненные строки
 
-        if (fullRow) pointMap  = (Point[,])tempPointMap.Clone();
-
+        if (fullRow)
+        {
+            pointMap  = (Point[,])tempPointMap.Clone();
+            ShowIndicators();
+        }
+        
     }
 
   
@@ -103,7 +177,7 @@ static public class Game
 
     }
 
-    static public void DrawIndicators()
+    static public void ShowIndicators()
     {
 
         Console.ForegroundColor = ConsoleColor.Yellow;   

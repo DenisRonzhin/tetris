@@ -74,7 +74,7 @@ public class Shape
         int previousPositionX;
         int previousPositionY;
          
-
+        
         public void CreateShape()
         {
 

@@ -4,24 +4,21 @@ using System.Threading.Tasks;
 namespace tetris
 {
     class Program
-    {
-        static void Main(string[] args)
+    {   static Shape MyShape;
+        static Shape NextShape;
+        static int skip = 0;
+
+        static void InitGame()
         {
-
-            int skip = 0;    
-
             WorkSpace.InintWindowsSize();
             WorkSpace.DrawWall();
 
             Game.score = 0;
-            Game.DrawIndicators(); 
+            Game.ShowIndicators(); 
     
-            Shape MyShape;
-
             MyShape = new Shape(12,0);
             MyShape.CreateShape();
 
-            Shape NextShape;
             NextShape = new Shape(12,0);
             NextShape.CreateShape();
             
@@ -29,6 +26,14 @@ namespace tetris
             Game.InitPointMap();
             MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
             NextShape.DrawNextShape();
+
+        }
+
+
+        static void Main(string[] args)
+        {
+
+            InitGame();
 
             Task delayTimer = Task.CompletedTask;
 
@@ -40,7 +45,6 @@ namespace tetris
                         {
 
                             ConsoleKeyInf = Console.ReadKey(true);
-
 
                         };
 
@@ -102,11 +106,11 @@ namespace tetris
                         MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
                         Game.ShowPointMap(); 
                        
-                        if (MyShape.allowMovement.top == false) 
+                        if (MyShape.allowMovement.top == false && Game.CheckGameOver() == false) 
                         {
                             skip++;
                             delayTimer  = delayGame(200);
-                            if (skip == 3)
+                            if (skip == 3) 
                                 {
                                     Game.CheckRow();
                                     skip = 0;        
@@ -118,13 +122,26 @@ namespace tetris
                                     NextShape.CreateShape();
                                     NextShape.DrawNextShape();
 
-                                }
+                                } 
                           
-                        }
+                        } else 
+                        
+                        if (MyShape.allowMovement.top == false && Game.CheckGameOver())
+                        {
+
+                            Game.ShowGameOver();
+                            Console.ReadKey();
+                            InitGame();  
+                            
+                     
+                             
+                        }  
                        
                         ConsoleKeyInf = new ConsoleKeyInfo();       
   
                  }  
+
+                 Console.ReadKey();
  
         }
 
@@ -133,8 +150,6 @@ namespace tetris
              await Task.Delay(spd_value);
 
         }         
-
-        
 
     }
 }
