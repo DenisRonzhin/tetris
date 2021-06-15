@@ -3,13 +3,10 @@ using System.Collections.Generic;
 
 static public class Game
 {
-
     static public int score {get;set;}
     static public int speed {get;set;}
     static public Point[,] pointMap = new Point[WorkSpace.hightGame,WorkSpace.wightGame];
     static Point[,] tempPointMap;  // Временный массив для сдвига заполненных строк
-    static List<int> fullRow = new List<int>{}; //Список хранит индексы заполненных строк массива 
-    //static public Shape currentShape {get; set;}
     
     //Заполняем стакан нулевыми элементами
     static public void InitPointMap()
@@ -18,9 +15,8 @@ static public class Game
         {
             for (int row = 0; row < WorkSpace.hightGame; row++)
             {
-               pointMap[row,col] = new Point(0,0,'.');  
+               pointMap[row,col] = new Point(0);  
             }
-            
         }
 
     }
@@ -37,7 +33,7 @@ static public class Game
         {
             for (int row = WorkSpace.hightGame-1; row >= 0; row--)
             {
-               tempPointMap[row,col] = new Point(0,0,'.');  
+               tempPointMap[row,col] = new Point(0);  
             }
             
         }

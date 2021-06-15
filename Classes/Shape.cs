@@ -2,11 +2,8 @@ using System;
 
 public class Shape 
     {
-        public char vsb {get;set;}
         public enum actionType {AddPointMap, RemovePointMap}
  
-            
-
         public struct allowMovementType
         { 
            public bool left;
@@ -59,10 +56,9 @@ public class Shape
 
        
         // конструктор класса, создание фигуры
-        public  Shape(char visibleSymbol, int x, int y )
+        public Shape(int x, int y )
         {
-            vsb = visibleSymbol;
-
+ 
             positionX = x;
             positionY = y;
 
@@ -85,7 +81,7 @@ public class Shape
     
             tShape = (typeShape)ChooseShape();    
 
-            switch(typeShape.O)
+            switch(tShape)
             {
                 //     
                 // ##
@@ -95,10 +91,10 @@ public class Shape
                         { 
                             shapeMap = new Point[4,4]
                                         {
-                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(1), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(1), new Point(0)},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
                                         };
 
                             break;
@@ -112,10 +108,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0), new Point(1), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(0), new Point(0)},
                                         };
 
                             break;
@@ -129,10 +125,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb)},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(0), new Point(1), new Point(1)},
+                                        {new Point(0), new Point(1), new Point(1), new Point(0)},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
                                         };
 
                             break;
@@ -146,10 +142,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
+                                        {new Point(1), new Point(1), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(1), new Point(0)},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
                                         };
 
                             break;
@@ -163,10 +159,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(1), new Point(0)},
                                         };
 
                             break;
@@ -179,10 +175,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(0), new Point(0)},
+                                        {new Point(1), new Point(1), new Point(0), new Point(0)},
                                         };
 
                             break;
@@ -195,10 +191,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(1,0,vsb), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
-                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
+                                        {new Point(1), new Point(1), new Point(1), new Point(0)},
+                                        {new Point(0), new Point(1), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
                                         };
 
                             break;
@@ -337,37 +333,24 @@ public class Shape
         //Обходим в цикле фигуру и переносим ее в массив рабочей области
         for (int col = currentExtremPoints.leftPointPosition; col < currentExtremPoints.rightPointPosition+1; col++)
         {
-            //for (int row = 0; row < Math.Min(positionY,currentExtremPoints.topPointPosition+1); row++)
-           
            for (int row = 0; row <= Math.Min(positionY,currentExtremPoints.topPointPosition); row++)
            
             {
-
-
                     if (actionType_ == actionType.AddPointMap)
                 
                     {
                         if (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col] = shapeMap[currentExtremPoints.topPointPosition-row,col];
 
-
-                        //Для отладки 
-                        // Console.SetCursorPosition(80,1);
-                        // Console.Write($"X = {positionX} Y = {positionY}      ");
-                
                     } 
                 
                     else
                 
                     {
-                        if (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col]  = new Point(0,0,'.');
+                        if (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col]  = new Point(0);
                     }
 
             }
         }
-
-        //Отладака Проверяем крайние точки фигуры    
-        // Console.SetCursorPosition(80,2);
-        // Console.Write($"left = {currentExtremPoints.leftPointPosition} right = {currentExtremPoints.rightPointPosition} top = {currentExtremPoints.topPointPosition}");
 
         }
 
@@ -376,7 +359,6 @@ public class Shape
         {
             if (CheckCollision().top) 
             {
-               // Game.previousPointMap = Game.pointMap.Clone();
                 previousPositionY = positionY;       
                 positionY++;
                 CheckCollision();
@@ -400,7 +382,5 @@ public class Shape
                 positionX++;
             } 
         }
-
-
 
     }

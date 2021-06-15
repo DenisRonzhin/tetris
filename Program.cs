@@ -18,11 +18,11 @@ namespace tetris
     
             Shape MyShape;
 
-            MyShape = new Shape((char)164,12,0);
+            MyShape = new Shape(12,0);
             MyShape.CreateShape();
 
             Shape NextShape;
-            NextShape = new Shape((char)164,12,0);
+            NextShape = new Shape(12,0);
             NextShape.CreateShape();
             
             //Game.currentShape = MyShape;
@@ -39,7 +39,7 @@ namespace tetris
                         if (Console.KeyAvailable)
                         {
 
-                            ConsoleKeyInf = Console.ReadKey();
+                            ConsoleKeyInf = Console.ReadKey(true);
 
 
                         };
@@ -114,7 +114,7 @@ namespace tetris
                                     MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
                                     delayTimer  = delayGame(500);
 
-                                    NextShape = new Shape((char)164,12,0);
+                                    NextShape = new Shape(12,0);
                                     NextShape.CreateShape();
                                     NextShape.DrawNextShape();
 

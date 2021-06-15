@@ -3,35 +3,35 @@
   public class Point
     {
         public int visibility {get;set;}
-        public int color {get;set;}
-        public char symbol {get;set;}
+        char symbolVisibility = (char)164;
+        char symbolInVisibility = '.';
+         
 
-        public Point(int visibility, int color, char symbol)
+        public Point(int visibility)
         {
-
             this.visibility  = visibility;
-            this.color = color;
-            this.symbol = symbol;
         }
 
         public void DrawPoint()
         {
 
-            if (visibility == 1) Console.ForegroundColor = ConsoleColor.White; else Console.ForegroundColor = ConsoleColor.DarkGray;   
-   
-            Console.Write(symbol);
-        
+            if (visibility == 1) 
+
+            { 
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write(symbolVisibility);
+         
+            } 
+
+            else
+
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;   
+                Console.Write(symbolInVisibility);
+            }
+     
             Console.CursorVisible = false;
         }
-
-        public void ClearPoint()
-        {
-            Console.ForegroundColor = ConsoleColor.Gray; 
-            Console.Write('.');
-            Console.CursorVisible = false;
-        }
-
-
 
     } 
    
