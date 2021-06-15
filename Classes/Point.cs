@@ -16,6 +16,9 @@
 
         public void DrawPoint()
         {
+
+            if (visibility == 1) Console.ForegroundColor = ConsoleColor.White; else Console.ForegroundColor = ConsoleColor.DarkGray;   
+   
             Console.Write(symbol);
         
             Console.CursorVisible = false;
@@ -23,7 +26,8 @@
 
         public void ClearPoint()
         {
-            Console.Write(' ');
+            Console.ForegroundColor = ConsoleColor.Gray; 
+            Console.Write('.');
             Console.CursorVisible = false;
         }
 

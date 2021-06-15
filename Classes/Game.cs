@@ -18,7 +18,7 @@ static public class Game
         {
             for (int row = 0; row < WorkSpace.hightGame; row++)
             {
-               pointMap[row,col] = new Point(0,0,' ');  
+               pointMap[row,col] = new Point(0,0,'.');  
             }
             
         }
@@ -28,21 +28,21 @@ static public class Game
     public static void CheckRow()
     {
         int fullRowCount = 0;
-        int currentRow = 0;
+        int currentRow = WorkSpace.hightGame;
         bool fullRow = false; 
 
         tempPointMap = new Point[WorkSpace.hightGame,WorkSpace.wightGame];
 
         for (int col = 0; col < WorkSpace.wightGame; col++)
         {
-            for (int row = 0; row < WorkSpace.hightGame; row++)
+            for (int row = WorkSpace.hightGame-1; row >= 0; row--)
             {
-               tempPointMap[row,col] = new Point(0,0,' ');  
+               tempPointMap[row,col] = new Point(0,0,'.');  
             }
             
         }
 
-        for (int row = 0; row < WorkSpace.hightGame; row++)
+        for (int row = WorkSpace.hightGame - 1; row >= 0; row--)
         {
         
             fullRowCount = 0;
@@ -58,12 +58,12 @@ static public class Game
             //заполним тестовый массив без заполненных строк
             if (fullRowCount != WorkSpace.wightGame)
             {
-                currentRow++;
+                currentRow--;
           
                 for (int col = 0; col < WorkSpace.wightGame ; col++)
                 {
                 
-                    tempPointMap[currentRow-1,col] = pointMap[row,col];
+                    tempPointMap[currentRow,col] = pointMap[row,col];
 
                 }
             } else fullRow = true;

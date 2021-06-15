@@ -95,10 +95,10 @@ public class Shape
                         { 
                             shapeMap = new Point[4,4]
                                         {
-                                        {new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' ')},
+                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
                                         };
 
                             break;
@@ -112,10 +112,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(0,0,' '), new Point(0,0,' ')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
                                         };
 
                             break;
@@ -129,10 +129,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(0,0,' '), new Point(1,0,vsb), new Point(1,0,vsb)},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' ')},
+                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb)},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
                                         };
 
                             break;
@@ -146,10 +146,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' ')},
+                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
                                         };
 
                             break;
@@ -163,10 +163,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,' ')},
+                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
                                         };
 
                             break;
@@ -179,10 +179,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,' '), new Point(0,0,' ')},
+                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
                                         };
 
                             break;
@@ -195,10 +195,10 @@ public class Shape
                         { 
                             shapeMap = new Point[,]
                                         {
-                                        {new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(1,0,vsb), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(1,0,vsb), new Point(0,0,' '), new Point(0,0,' ')},
-                                        {new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' '), new Point(0,0,' ')},
+                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(1,0,vsb), new Point(1,0,vsb), new Point(1,0,vsb), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(1,0,vsb), new Point(0,0,'.'), new Point(0,0,'.')},
+                                        {new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.'), new Point(0,0,'.')},
                                         };
 
                             break;
@@ -223,7 +223,7 @@ public class Shape
 
                for (int col = 0; col < 4; col++)
                {
-                  if (shapeMap[row,col].visibility == 1) shapeMap[row,col].DrawPoint(); else shapeMap[row,col].ClearPoint();
+                   shapeMap[row,col].DrawPoint();
                }     
 
             }
@@ -359,7 +359,7 @@ public class Shape
                     else
                 
                     {
-                        if (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col]  = new Point(0,0,' ');
+                        if (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col]  = new Point(0,0,'.');
                     }
 
             }
