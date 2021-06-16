@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace tetris
 {
@@ -33,78 +34,87 @@ namespace tetris
         static void Main(string[] args)
         {
 
+
+             //Фиксируем время нажатия на клавишу    
+            long keyPressTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+
+            //Фиксируем текущее время                       
+            long currentTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+
+            bool allowMove = false;    
+
             InitGame();
 
             Task delayTimer = Task.CompletedTask;
 
             ConsoleKeyInfo ConsoleKeyInf = new ConsoleKeyInfo();
 
+            
             while (true)
                  {
-                        if (Console.KeyAvailable)
+                        if (Console.KeyAvailable ) 
                         {
+                            
+                            keyPressTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();   
 
                             ConsoleKeyInf = Console.ReadKey(true);
 
-                        };
+                            switch(ConsoleKeyInf.Key)
+
+                            { 
+                                case ConsoleKey.LeftArrow:
+                            
+                                {
+                                    MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
+                                    MyShape.MooveShapeleft();   
+                                    MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                                    break;
+                                }
+                            
+                                case ConsoleKey.RightArrow: 
+                                {
+                                    MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
+                                    MyShape.MooveShapeRight();   
+                                    MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                                    break;
+                                }
+
+                                case ConsoleKey.Spacebar:
+
+                                    {
+                                    MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
+                                    MyShape.CreateShape();
+                                    MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                                    break;
+                                    }
+
+                                case ConsoleKey.DownArrow:
+
+                                    {
+                                    MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
+                                    MyShape.MooveShapeDown();
+                                    MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                     
+                                    break;
+                                    }
+                            }
+                        }
+
+                        Game.ShowPointMap(); 
+
+                        currentTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();    
 
                         if (!delayTimer.IsCompleted) continue; // если таймер не сработал, продолжаем цикл
 
+                        if (currentTime - keyPressTime >  70 || MyShape.allowMovement.left == false || MyShape.allowMovement.right == false) 
+                        {
+                            MyShape.AddShapePointMap(Shape.actionType.RemovePointMap); 
+                            MyShape.MooveShapeDown();
+                            MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                            delayTimer  = delayGame(500);
 
-                        //алгоритм отрисовки: стираем, меняем координаты, рисуем по новой.
-
-                        switch(ConsoleKeyInf.Key)
-
-                        { 
-                            case ConsoleKey.LeftArrow:
-                          
-                            {
-                                MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
-                                MyShape.MooveShapeleft();   
-                                delayTimer  = delayGame(10);
-                                break;
-                            }
-                          
-                            case ConsoleKey.RightArrow: 
-                            {
-                                MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
-                                MyShape.MooveShapeRight();   
-                                delayTimer  = delayGame(10);
-                                break;
-                            }
-
-                            case ConsoleKey.Spacebar:
-
-                                {
-                                MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
-                                MyShape.CreateShape();
-                                delayTimer  = delayGame(10);
-            
-                                break;
-                                }
-
-                            case ConsoleKey.DownArrow:
-
-                                {
-                                MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
-                                MyShape.MooveShapeDown();
-                                delayTimer  = delayGame(10);
-                                break;
-                                }
-
-
-                            default:
-                                {
-                                    MyShape.AddShapePointMap(Shape.actionType.RemovePointMap); 
-                                    MyShape.MooveShapeDown();
-                                    delayTimer  = delayGame(500);
-                                    break;
-                                }    
- 
-                        } 
-    
-                        MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
-                        Game.ShowPointMap(); 
+                            //allowMove = true;
+                        }    
                        
                         if (MyShape.allowMovement.top == false && Game.CheckGameOver() == false) 
                         {
@@ -112,6 +122,8 @@ namespace tetris
                             delayTimer  = delayGame(200);
                             if (skip == 3) 
                                 {
+
+                                   // Thread.Sleep(500); 
                                     Game.CheckRow();
                                     skip = 0;        
                                     MyShape = NextShape;
@@ -120,8 +132,11 @@ namespace tetris
 
                                     NextShape = new Shape(12,0);
                                     NextShape.CreateShape();
+
                                     NextShape.DrawNextShape();
 
+                                   // allowMove = false;
+                                    
                                 } 
                           
                         } else 
@@ -132,8 +147,6 @@ namespace tetris
                             Game.ShowGameOver();
                             Console.ReadKey();
                             InitGame();  
-                            
-                     
                              
                         }  
                        
@@ -153,3 +166,4 @@ namespace tetris
 
     }
 }
+
