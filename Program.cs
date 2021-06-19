@@ -31,9 +31,14 @@ namespace tetris
         }
 
 
+        static void ClearBuferKey()
+        {
+            while (Console.KeyAvailable) Console.ReadKey(true);
+        }
+
+
         static void Main(string[] args)
         {
-
 
              //Фиксируем время нажатия на клавишу    
             long keyPressTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
@@ -41,7 +46,6 @@ namespace tetris
             //Фиксируем текущее время                       
             long currentTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();
 
-            bool allowMove = false;    
 
             InitGame();
 
@@ -64,39 +68,40 @@ namespace tetris
                             { 
                                 case ConsoleKey.LeftArrow:
                             
-                                {
+                                {  
                                     MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
                                     MyShape.MooveShapeleft();   
                                     MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                                    ClearBuferKey(); 
                                     break;
                                 }
-                            
+
                                 case ConsoleKey.RightArrow: 
-                                {
+                                { 
                                     MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
                                     MyShape.MooveShapeRight();   
-                                    MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                                    MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
+                                    ClearBuferKey();  
                                     break;
                                 }
-
+    
                                 case ConsoleKey.Spacebar:
-
-                                    {
+                                {
                                     MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
                                     MyShape.CreateShape();
                                     MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                                    ClearBuferKey(); 
                                     break;
-                                    }
+                                }
 
                                 case ConsoleKey.DownArrow:
-
-                                    {
+                                {
                                     MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
                                     MyShape.MooveShapeDown();
                                     MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
-                     
+                                    ClearBuferKey();
                                     break;
-                                    }
+                                }
                             }
                         }
 
