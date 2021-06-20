@@ -158,10 +158,13 @@ static public class Game
             {
                 Console.SetCursorPosition(col+2,row);
                 pointMap[row,col].DrawPoint();
-                Console.SetCursorPosition(25,0); // глючит курсор, стирает часть стены. Загоним его в область где нет символов.
             }
         }
 
+          
+
+        Console.SetCursorPosition(25,0); // глючит курсор, стирает часть стены. Загоним его в область где нет символов.
+        
     }
 
 

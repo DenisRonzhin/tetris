@@ -9,12 +9,19 @@ public class Shape
            public bool left;
            public bool right;
            public bool top;
+           public int shiftX;
+           public int shiftY;
+           public int angle;
         
-           public allowMovementType(bool left_, bool right_, bool top_)
+           public allowMovementType(bool left_, bool right_, bool top_, int shiftX, int shiftY, int angle)
            {
                this.left = left_;
                this.right = right_;
                this.top = top_;
+               //Смещение для нулефой точки. Используется для поворота
+               this.shiftX = shiftX; 
+               this.shiftY = shiftY;
+               this.angle = angle;
            }
         }     
 
@@ -62,7 +69,7 @@ public class Shape
             positionX = x;
             positionY = y;
 
-            allowMovement = new allowMovementType(true,true,true);   
+            allowMovement = new allowMovementType(true,true,true,0,0,0);   
 
         }
     
@@ -81,6 +88,9 @@ public class Shape
     
             tShape = (typeShape)ChooseShape();    
 
+            //tShape = typeShape.I;
+
+
             switch(tShape)
             {
                 //     
@@ -89,6 +99,12 @@ public class Shape
                 //  
                 case typeShape.O: 
                         { 
+
+                            allowMovement.shiftX = 1;
+                            allowMovement.shiftY = 2;
+                            allowMovement.angle = 0;
+                            
+
                             shapeMap = new Point[4,4]
                                         {
                                         {new Point(0), new Point(0), new Point(0), new Point(0)},
@@ -106,6 +122,11 @@ public class Shape
    
                 case typeShape.I: 
                         { 
+            
+                            allowMovement.shiftX = 1;
+                            allowMovement.shiftY = 2;
+                            allowMovement.angle = 0;
+                   
                             shapeMap = new Point[,]
                                         {
                                         {new Point(0), new Point(1), new Point(0), new Point(0)},
@@ -123,6 +144,10 @@ public class Shape
                 //  
                 case typeShape.S: 
                         { 
+                            allowMovement.shiftX = 2;
+                            allowMovement.shiftY = 2;
+                            allowMovement.angle = 0;
+                   
                             shapeMap = new Point[,]
                                         {
                                         {new Point(0), new Point(0), new Point(0), new Point(0)},
@@ -140,6 +165,10 @@ public class Shape
 
                 case typeShape.Z: 
                         { 
+                            allowMovement.shiftX = 1;
+                            allowMovement.shiftY = 2;
+                            allowMovement.angle = 0;
+                   
                             shapeMap = new Point[,]
                                         {
                                         {new Point(0), new Point(0), new Point(0), new Point(0)},
@@ -157,6 +186,11 @@ public class Shape
 
                 case typeShape.L: 
                         { 
+                            
+                            allowMovement.shiftX = 1;
+                            allowMovement.shiftY = 2;
+                            allowMovement.angle = 0;
+                   
                             shapeMap = new Point[,]
                                         {
                                         {new Point(0), new Point(0), new Point(0), new Point(0)},
@@ -173,6 +207,11 @@ public class Shape
                 //## 
                 case typeShape.J: 
                         { 
+
+                            allowMovement.shiftX = 1;
+                            allowMovement.shiftY = 2;
+                            allowMovement.angle = 0;
+                            
                             shapeMap = new Point[,]
                                         {
                                         {new Point(0), new Point(0), new Point(0), new Point(0)},
@@ -189,6 +228,11 @@ public class Shape
                 //  
                case typeShape.T: 
                         { 
+                    
+                            allowMovement.shiftX = 1;
+                            allowMovement.shiftY = 2;
+                            allowMovement.angle = 0;
+                    
                             shapeMap = new Point[,]
                                         {
                                         {new Point(0), new Point(0), new Point(0), new Point(0)},
@@ -224,6 +268,76 @@ public class Shape
 
             }
 
+        }
+
+        //Метод поворота
+
+         public void RotateShape()
+         {
+          
+            if (tShape != typeShape.O)
+          
+            {
+          
+                Point[,] tempPoint; //вспомогательный массив. В нем собираем новую фигуру после поворота
+
+                int x = 0;
+                int y = 0;
+            
+                //Пустой массив   
+                tempPoint = new Point[,]
+                                        {
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
+                                        {new Point(0), new Point(0), new Point(0), new Point(0)},
+                                        };
+
+                //Записываем пороворот фигуры в новом массиве            
+                for (int row = 0; row < 4; row++)
+                {
+                    for (int col = 0; col < 4; col++)
+                    
+                    {
+                        if (shapeMap[row,col].visibility == 1) 
+                        {
+                            //Для линии ствои правила
+                            if (tShape == typeShape.I && allowMovement.angle == 90)
+                            {
+                                    //развернем в обратную сторону
+                                    x =  (row - allowMovement.shiftY)+allowMovement.shiftX;
+                                    y =  -(col - allowMovement.shiftX)+allowMovement.shiftY; 
+                                    tempPoint[y,x] = shapeMap[row,col];    
+                            } 
+                            else   
+                            {    
+                                x =  -(row - allowMovement.shiftY)+allowMovement.shiftX;
+                                y =  (col - allowMovement.shiftX)+allowMovement.shiftY; 
+                                tempPoint[y,x] = shapeMap[row,col];    
+                            }    
+
+                        }
+                    }
+
+          
+                }
+
+                 if (tShape == typeShape.I) 
+
+                    {
+                        if (allowMovement.angle == 90) allowMovement.angle = 0; else allowMovement.angle = allowMovement.angle+90;
+                    }
+                    
+                    else
+                   
+                    {
+                        if (allowMovement.angle == 360 ) allowMovement.angle = 0; else allowMovement.angle = allowMovement.angle+90;
+                    }  
+
+                shapeMap  = (Point[,])tempPoint.Clone();
+    
+                FindExtrem();
+            }    
         }
 
 
@@ -322,7 +436,7 @@ public class Shape
 
             Random randomShape = new Random();
             
-            int numberShape = randomShape.Next(1,7); //фигуры с 1 по 7
+            int numberShape = randomShape.Next(1,8); //фигуры с 1 по 7
 
             return numberShape;
 

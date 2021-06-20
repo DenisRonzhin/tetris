@@ -72,6 +72,7 @@ namespace tetris
                                     MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
                                     MyShape.MooveShapeleft();   
                                     MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                                    Game.ShowPointMap();
                                     ClearBuferKey(); 
                                     break;
                                 }
@@ -81,6 +82,7 @@ namespace tetris
                                     MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
                                     MyShape.MooveShapeRight();   
                                     MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
+                                    Game.ShowPointMap();
                                     ClearBuferKey();  
                                     break;
                                 }
@@ -88,8 +90,10 @@ namespace tetris
                                 case ConsoleKey.Spacebar:
                                 {
                                     MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
-                                    MyShape.CreateShape();
+                                    MyShape.RotateShape();
+                                    //MyShape.CreateShape();
                                     MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                                    Game.ShowPointMap();
                                     ClearBuferKey(); 
                                     break;
                                 }
@@ -99,13 +103,15 @@ namespace tetris
                                     MyShape.AddShapePointMap(Shape.actionType.RemovePointMap);
                                     MyShape.MooveShapeDown();
                                     MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                                    Game.ShowPointMap();
                                     ClearBuferKey();
                                     break;
                                 }
                             }
                         }
 
-                        Game.ShowPointMap(); 
+                            Console.SetCursorPosition(25,15);
+                            Console.Write($"x-{MyShape.positionX}, y-{MyShape.positionY} ");                         
 
                         currentTime = DateTimeOffset.Now.ToUnixTimeMilliseconds();    
 
@@ -116,10 +122,11 @@ namespace tetris
                             MyShape.AddShapePointMap(Shape.actionType.RemovePointMap); 
                             MyShape.MooveShapeDown();
                             MyShape.AddShapePointMap(Shape.actionType.AddPointMap); 
+                            Game.ShowPointMap();
                             delayTimer  = delayGame(500);
 
                             //allowMove = true;
-                        }    
+                        } 
                        
                         if (MyShape.allowMovement.top == false && Game.CheckGameOver() == false) 
                         {
@@ -133,6 +140,8 @@ namespace tetris
                                     skip = 0;        
                                     MyShape = NextShape;
                                     MyShape.AddShapePointMap(Shape.actionType.AddPointMap);
+                                    Game.ShowPointMap();
+
                                     delayTimer  = delayGame(500);
 
                                     NextShape = new Shape(12,0);
