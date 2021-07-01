@@ -168,7 +168,7 @@ namespace tetris
   
                  }  
 
-                 Console.ReadKey();
+            // Console.ReadKey();
  
         }
 

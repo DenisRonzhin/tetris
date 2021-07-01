@@ -3,7 +3,7 @@ using System;
 public class Shape 
     {
         public enum actionType {AddPointMap, RemovePointMap}
- 
+        
         public struct allowMovementType
         { 
            public bool left;
@@ -88,7 +88,7 @@ public class Shape
     
             tShape = (typeShape)ChooseShape();    
 
-            //tShape = typeShape.I;
+            tShape = typeShape.I;
 
 
             switch(tShape)
@@ -248,7 +248,7 @@ public class Shape
  
 
             //Заполним крайние точки фигуры
-            FindExtrem();
+            FindExtrem(shapeMap);
 
         }
 
@@ -301,7 +301,7 @@ public class Shape
                     {
                         if (shapeMap[row,col].visibility == 1) 
                         {
-                            //Для линии ствои правила
+                            //Для линии свои правила поворачиваем ее на 90 и обратно
                             if (tShape == typeShape.I && allowMovement.angle == 90)
                             {
                                     //развернем в обратную сторону
@@ -322,7 +322,13 @@ public class Shape
           
                 }
 
-                 if (tShape == typeShape.I) 
+                FindExtrem(tempPoint);
+
+                if (TryAddShape(tempPoint)) 
+
+                { 
+                
+                    if (tShape == typeShape.I) 
 
                     {
                         if (allowMovement.angle == 90) allowMovement.angle = 0; else allowMovement.angle = allowMovement.angle+90;
@@ -333,16 +339,44 @@ public class Shape
                     {
                         if (allowMovement.angle == 360 ) allowMovement.angle = 0; else allowMovement.angle = allowMovement.angle+90;
                     }  
-
-                shapeMap  = (Point[,])tempPoint.Clone();
+                    
+                    shapeMap  = (Point[,])tempPoint.Clone();
+                
+                }
     
-                FindExtrem();
+                FindExtrem(shapeMap);
             }    
         }
 
 
+         public bool TryAddShape(Point[,] shapeArray)
+         {
+           
+             bool result = true;
+
+            //Обходим в цикле фигуру и переносим ее в массив рабочей области
+            for (int col = currentExtremPoints.leftPointPosition; col < currentExtremPoints.rightPointPosition+1; col++)
+            {
+            for (int row = 0; row <= Math.Min(positionY,currentExtremPoints.topPointPosition); row++)
+            
+                {
+                    if (positionY-row < 0) { result = false;} else//ушли за границы массива 
+                    if (positionX-2+col >= WorkSpace.wightGame || positionX-2+col < 0 ) { result = false;} else//ушли за границы массивы
+                    if (Game.pointMap[positionY-row,positionX-2+col].visibility ==1) { result = false;} //наткнулись на фигуру 
+                   
+                    //if (shapeArray[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col] = shapeMap[currentExtremPoints.topPointPosition-row,col];
+                   
+                }
+
+            }
+
+            return result;
+
+        }
+
+
         //Метод для поиска границ фигуры
-        void FindExtrem()
+        void FindExtrem(Point[,] shapeArray)
         {
             int minX = 4;
             int maxX = 0;
@@ -353,9 +387,9 @@ public class Shape
             {
                 for (int row = 0; row < 4; row++)
                 {
-                    if (shapeMap[row,col].visibility == 1 && col < minX) {minX = col;}
-                    if (shapeMap[row,col].visibility == 1 && col > maxX) {maxX = col;}
-                    if (shapeMap[row,col].visibility == 1 && row > maxY) {maxY = row;}
+                    if (shapeArray[row,col].visibility == 1 && col < minX) {minX = col;}
+                    if (shapeArray[row,col].visibility == 1 && col > maxX) {maxX = col;}
+                    if (shapeArray[row,col].visibility == 1 && row > maxY) {maxY = row;}
     
                 }    
 
@@ -381,13 +415,16 @@ public class Shape
             //Проверяем налетели на стенки или нет и дошли ли до конца   
             if (positionX-2+currentExtremPoints.leftPointPosition > 0) allowMovement.left = true; else allowMovement.left = false;
             
-            if (positionX-1+currentExtremPoints.rightPointPosition < WorkSpace.wightGame) allowMovement.right = true; else allowMovement.right = false; 
+            if (positionX-1+currentExtremPoints.rightPointPosition < WorkSpace.wightGame) allowMovement.right = true; else
+             allowMovement.right = false; 
             
-            if (positionY < WorkSpace.hightGame) allowMovement.top = true; else 
+            if (positionY < WorkSpace.hightGame) allowMovement.top = true;
+            
+            else 
             
             {
-             allowMovement.top = false;
-             positionY = previousPositionY;
+                allowMovement.top = false;
+                positionY = previousPositionY;
             };
                       
             //Проверяем столкновение с другими фигурами
@@ -444,27 +481,28 @@ public class Shape
 
         public void AddShapePointMap(actionType actionType_)
         {
-        //Обходим в цикле фигуру и переносим ее в массив рабочей области
-        for (int col = currentExtremPoints.leftPointPosition; col < currentExtremPoints.rightPointPosition+1; col++)
-        {
-           for (int row = 0; row <= Math.Min(positionY,currentExtremPoints.topPointPosition); row++)
-           
+            //Обходим в цикле фигуру и переносим ее в массив рабочей области
+            for (int col = currentExtremPoints.leftPointPosition; col < currentExtremPoints.rightPointPosition+1; col++)
             {
-                    if (actionType_ == actionType.AddPointMap)
+            for (int row = 0; row <= Math.Min(positionY,currentExtremPoints.topPointPosition); row++)
+            
+                {
+                        if (actionType_ == actionType.AddPointMap)
+                    
+                        {
                 
-                    {
-                        if (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col] = shapeMap[currentExtremPoints.topPointPosition-row,col];
+                            if (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col] = shapeMap[currentExtremPoints.topPointPosition-row,col];
 
-                    } 
-                
-                    else
-                
-                    {
-                        if (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col]  = new Point(0);
-                    }
+                        } 
+                    
+                        else
+                    
+                        {
+                            if (shapeMap[currentExtremPoints.topPointPosition-row,col].visibility == 1) Game.pointMap[positionY-row,positionX-2+col]  = new Point(0);
+                        }
 
+                }
             }
-        }
 
         }
 
